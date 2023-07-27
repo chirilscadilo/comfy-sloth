@@ -1,3 +1,11 @@
+import productsItems from "../data/items.json";
+
 export function Products() {
-  return <h1>Products</h1>;
+  return (
+    <>
+      {productsItems.map((product) => (
+        <div>{JSON.stringify(product)}</div>
+      ))}
+    </>
+  );
 }

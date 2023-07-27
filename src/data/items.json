@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "name": "Armchair",
+    "price": 125.99,
+    "img": "../../public/armchair.jpeg"
+  },
+
+  {
+    "id": 2,
+    "name": "Emperor-bed",
+    "price": 239.99,
+    "img": "../../public/emperor-bed.jpeg"
+  },
+
+  {
+    "id": 3,
+    "name": "Leather Chair",
+    "price": 200.99,
+    "img": "../../public/leather-chair.jpeg"
+  },
+
+  {
+    "id": 4,
+    "name": "Leather Sofa",
+    "price": 999.99,
+    "img": "../../public/leather-sofa.jpeg"
+  },
+
+  {
+    "id": 5,
+    "name": "Modern Bookshelf",
+    "price": 319.99,
+    "img": "../../public/modern-bookshelf.jpeg"
+  }
+]

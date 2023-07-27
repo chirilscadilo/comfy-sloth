@@ -39,12 +39,13 @@ export function Navbar() {
           </div>
 
           <div className="navbar-cart-login">
-            <a>
+            <a className="shopping-cart-button">
               Cart
               <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
+              <div className="rounded-circle">3</div>
             </a>
 
-            <a>
+            <a className="login-button">
               Login
               <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
             </a>

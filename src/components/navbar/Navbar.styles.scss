@@ -36,12 +36,43 @@
   .navbar-cart-login {
     display: flex;
     flex-direction: row;
+    gap: 15px;
     justify-content: space-around;
 
-    a {
+    .shopping-cart-button {
       display: flex;
       align-items: center;
-      gap: 10px;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      color: black;
+      text-decoration: none;
+      font-size: 1.5rem;
+      position: relative;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .rounded-circle {
+        background-color: #ab7a5f;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        font-size: 0.75rem;
+        padding: 12px;
+        position: absolute;
+        top: -10%;
+        right: -10%;
+      }
+    }
+
+    .login-button {
+      display: flex;
+      align-items: center;
       font-family: "Roboto", sans-serif;
       font-weight: 300;
       color: black;

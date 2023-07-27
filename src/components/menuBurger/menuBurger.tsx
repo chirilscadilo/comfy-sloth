@@ -48,12 +48,19 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
           </div>
 
           <div className="menu-cart-login">
-            <a onClick={() => menuObj.setActive(false)}>
+            <a
+              className="shopping-cart-button"
+              onClick={() => menuObj.setActive(false)}
+            >
               Cart
               <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
+              <div className="rounded-circle">3</div>
             </a>
 
-            <a onClick={() => menuObj.setActive(false)}>
+            <a
+              className="login-button"
+              onClick={() => menuObj.setActive(false)}
+            >
               Login
               <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
             </a>
