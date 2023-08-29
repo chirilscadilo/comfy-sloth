@@ -1,36 +1,45 @@
 [
   {
-    "id": 1,
+    "id": "1",
     "name": "Armchair",
     "price": 125.99,
-    "img": "../../public/armchair.jpeg"
+    "img": "/armchair.jpeg",
+    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge"
   },
 
   {
-    "id": 2,
+    "id": "2",
     "name": "Emperor-bed",
     "price": 239.99,
-    "img": "../../public/emperor-bed.jpeg"
+    "img": "/emperor-bed.jpeg",
+    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+    "category": "Living Room"
   },
 
   {
-    "id": 3,
+    "id": "3",
     "name": "Leather Chair",
     "price": 200.99,
-    "img": "../../public/leather-chair.jpeg"
+    "img": "/leather-chair.jpeg",
+    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+    "category": "Office"
   },
 
   {
-    "id": 4,
+    "id": "4",
     "name": "Leather Sofa",
     "price": 999.99,
-    "img": "../../public/leather-sofa.jpeg"
+    "img": "/leather-sofa.jpeg",
+    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+    "category": "Living Room"
   },
 
   {
-    "id": 5,
+    "id": "5",
     "name": "Modern Bookshelf",
     "price": 319.99,
-    "img": "../../public/modern-bookshelf.jpeg"
+    "img": "/modern-bookshelf.jpeg",
+    "description": "Cloud bread VHS hell of banjo bicycle rights jianbing umami mumblecore etsy 8-bit pok pok +1 wolf. Vexillologist yr dreamcatcher waistcoat, authentic chillwave trust fund. Viral typewriter fingerstache pinterest pork belly narwhal. Schlitz venmo everyday carry kitsch pitchfork chillwave iPhone taiyaki trust fund hashtag kinfolk microdosing gochujang live-edge",
+    "category": "Bedroom"
   }
 ]

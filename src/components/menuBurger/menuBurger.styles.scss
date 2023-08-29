@@ -6,6 +6,7 @@
   left: 0;
   transform: translate(-100%);
   transition: all 0.6s;
+  z-index: 10;
 
   .menu-content {
     width: 100%;
@@ -22,12 +23,16 @@
       a {
         font-family: "Roboto", sans-serif;
         font-weight: 300;
+        letter-spacing: 0.1rem;
         color: black;
         text-decoration: none;
         padding: 1rem 1.5rem;
+        transition: all 0.3s linear;
 
         &:hover {
           cursor: pointer;
+          padding-left: 5px;
+          background-color: #f1f5f8;
         }
       }
 

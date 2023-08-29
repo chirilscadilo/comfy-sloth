@@ -7,7 +7,7 @@
   height: 5em;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 
   img {
@@ -21,6 +21,7 @@
       color: black;
       text-decoration: none;
       padding: 0.5rem;
+      letter-spacing: 0.1rem;
 
       &:hover {
         cursor: pointer;
@@ -48,6 +49,7 @@
       text-decoration: none;
       font-size: 1.5rem;
       position: relative;
+      letter-spacing: 0.1rem;
 
       &:hover {
         cursor: pointer;
@@ -78,6 +80,7 @@
       color: black;
       text-decoration: none;
       font-size: 1.5rem;
+      letter-spacing: 0.1rem;
 
       &:hover {
         cursor: pointer;

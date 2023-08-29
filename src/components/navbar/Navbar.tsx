@@ -20,42 +20,40 @@ export function Navbar() {
   };
   return (
     <div>
-      <nav>
-        <div className="navbar-container">
+      <nav className="navbar-container">
+        <Link to="/">
+          <img src="../src/assets/logo.svg" alt="Logo" />
+        </Link>
+
+        <div className="navbar-links-container">
           <Link to="/">
-            <img src="../src/assets/logo.svg" alt="Logo" />
+            <span>Home</span>
           </Link>
+          <Link to="/about">
+            <span>About</span>
+          </Link>
+          <Link to="/products">
+            <span>Products</span>
+          </Link>
+        </div>
 
-          <div className="navbar-links-container">
-            <Link to="/">
-              <span>Home</span>
-            </Link>
-            <Link to="/about">
-              <span>About</span>
-            </Link>
-            <Link to="/products">
-              <span>Products</span>
-            </Link>
-          </div>
+        <div className="navbar-cart-login">
+          <a className="shopping-cart-button">
+            Cart
+            <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
+            <div className="rounded-circle">3</div>
+          </a>
 
-          <div className="navbar-cart-login">
-            <a className="shopping-cart-button">
-              Cart
-              <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
-              <div className="rounded-circle">3</div>
-            </a>
+          <a className="login-button">
+            Login
+            <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
+          </a>
+        </div>
 
-            <a className="login-button">
-              Login
-              <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
-            </a>
-          </div>
-
-          <div className="burger-container" onClick={updateMenu}>
-            <span className={burger_class}></span>
-            <span className={burger_class}></span>
-            <span className={burger_class}></span>
-          </div>
+        <div className="burger-container" onClick={updateMenu}>
+          <span className={burger_class}></span>
+          <span className={burger_class}></span>
+          <span className={burger_class}></span>
         </div>
       </nav>
 
