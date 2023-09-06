@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import productsItems from "../data/items.json";
 import ProductCard from "../components/productCard/productCard";
 import "./Products.styles.scss";
@@ -9,6 +9,34 @@ export function Products() {
   const [clickGrid, setClickGrid] = useState(true);
   const [clickList, setClickList] = useState(false);
   const [productSort, setProductSort] = useState("lowest");
+  const [searchValue, setSearchValue] = useState<string | undefined>("");
+  const [categoryFilter, setCategoryFilter] = useState<string | null>("");
+  const [companyFilter, setCompanyFilter] = useState<string | null>("");
+  const [price, setPrice] = useState<any | null>(1000);
+
+  const filteredProducts = productsItems.filter((product) => {
+    if (
+      searchValue &&
+      !product.name.toLowerCase().includes(searchValue.toLowerCase())
+    ) {
+      return false;
+    }
+    if (categoryFilter && product.category !== categoryFilter) {
+      return false;
+    }
+
+    if (companyFilter && product.company !== companyFilter) {
+      return false;
+    }
+
+    if (price && product.price >= price) {
+      return false;
+    }
+
+    return true;
+  });
+
+  console.log(price);
 
   const GridDisplayProducts = () => {
     setClickGrid(true);
@@ -19,30 +47,89 @@ export function Products() {
     setClickList(true);
   };
 
-  const renderSwitch = (productSort: string) => {
-    switch (productSort) {
-      case "higher":
-        productsItems.sort((a, b) => {
-          return b.price - a.price;
-        });
-      case "alphabetic":
-        productsItems.sort((a, b) => {
-          return a.name.localeCompare(b.name);
-        });
-      case "non-alphabetic":
-        productsItems.sort((a, b) => {
-          return b.name.localeCompare(a.name);
-        });
-      default:
-        productsItems.sort((a, b) => {
-          return a.price - b.price;
-        });
-    }
-  };
-
   return (
     <div className="products-filter-container">
-      <section className="filter-container">Filter Column</section>
+      <form className="filter-container">
+        <input
+          type="text"
+          name="text"
+          placeholder="Search"
+          className="search-input"
+          value={searchValue || ""}
+          onChange={(e) => {
+            setSearchValue(e.target.value || undefined);
+          }}
+        />
+
+        <div className="category-filter">
+          <h5 className="category-title">Category</h5>
+          <select
+            name=""
+            id=""
+            value={categoryFilter || ""}
+            onChange={(e) => {
+              setCategoryFilter(e.target.value || null);
+            }}
+            className="category-option"
+          >
+            <option value="">All</option>
+            <option value="Office">Office</option>
+            <option value="Living Room">Living Room</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Bedroom">Bedroom</option>
+            <option value="Dining">Dining</option>
+            <option value="Kids">Kids</option>
+          </select>
+        </div>
+
+        <div className="company-filter">
+          <h5 className="title">Company</h5>
+          <select
+            name="company"
+            value={companyFilter || ""}
+            onChange={(e) => {
+              setCompanyFilter(e.target.value || null);
+            }}
+            className="company-option"
+          >
+            <option value="">All</option>
+            <option value="Marcos">Marcos</option>
+            <option value="Ikea">Ikea</option>
+            <option value="Liddy">Liddy</option>
+          </select>
+        </div>
+
+        <div className="price-range">
+          <h5 className="title-price">Price</h5>
+          <label htmlFor="price" className="price">
+            ${price}
+          </label>
+          <input
+            type="range"
+            id="price"
+            name="price"
+            min={0}
+            max={1000}
+            value={price}
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+          />
+        </div>
+
+        <button
+          type="button"
+          className="clear-btn"
+          onClick={() => {
+            setSearchValue("");
+            setCompanyFilter("");
+            setCategoryFilter("");
+            setPrice(1000);
+          }}
+        >
+          Clear Filters
+        </button>
+      </form>
 
       <section className="sorting-products-container">
         <div className="sorting-type">
@@ -68,7 +155,7 @@ export function Products() {
             </a>
           </div>
           <p className="products-found">
-            {productsItems.length} Products Found
+            {filteredProducts.length} Products Found
           </p>
           <hr />
           <form className="sort-form">
@@ -93,7 +180,7 @@ export function Products() {
           }
         >
           {productSort === "lowest"
-            ? productsItems
+            ? filteredProducts
                 .sort((a, b) => {
                   return a.price - b.price;
                 })
@@ -105,7 +192,7 @@ export function Products() {
                   />
                 ))
             : productSort === "higher"
-            ? productsItems
+            ? filteredProducts
                 .sort((a, b) => {
                   return b.price - a.price;
                 })
@@ -117,7 +204,7 @@ export function Products() {
                   />
                 ))
             : productSort === "alphabetic"
-            ? productsItems
+            ? filteredProducts
                 .sort((a, b) => {
                   return a.name.localeCompare(b.name);
                 })
@@ -128,7 +215,7 @@ export function Products() {
                     clickList={clickList}
                   />
                 ))
-            : productsItems
+            : filteredProducts
                 .sort((a, b) => {
                   return b.name.localeCompare(a.name);
                 })
