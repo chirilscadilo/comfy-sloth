@@ -3,6 +3,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./menuBurger.styles.scss";
 import { SetStateAction } from "react";
+import { useAppSelector } from "../../hooks/hooks";
 
 interface MenuBurgerProps {
   active: boolean;
@@ -12,6 +13,7 @@ interface MenuBurgerProps {
 }
 
 const MenuBurger = (menuObj: MenuBurgerProps) => {
+  const pickedProduct = useAppSelector((state) => state.products);
   return (
     <>
       <div className={menuObj.active ? "menu active" : "menu"}>
@@ -48,14 +50,17 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
           </div>
 
           <div className="menu-cart-login">
-            <a
+            <Link
+              to="/cart"
               className="shopping-cart-button"
               onClick={() => menuObj.setActive(false)}
             >
               Cart
               <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
-              <div className="rounded-circle">3</div>
-            </a>
+              <div className="rounded-circle">
+                {pickedProduct.products.length}
+              </div>
+            </Link>
 
             <a
               className="login-button"

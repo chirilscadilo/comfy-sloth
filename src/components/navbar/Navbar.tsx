@@ -4,8 +4,11 @@ import "./Navbar.styles.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import MenuBurger from "../menuBurger/menuBurger";
-
+import { useAppSelector } from "../../hooks/hooks";
 export function Navbar() {
+  const totalProductsAmount = useAppSelector(
+    (state) => state.products.totalAmount
+  );
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
   const [isMenuClicked, setIsMenuCLicked] = useState(false);
 
@@ -38,11 +41,11 @@ export function Navbar() {
         </div>
 
         <div className="navbar-cart-login">
-          <a className="shopping-cart-button">
+          <Link to="/cart" className="shopping-cart-button">
             Cart
             <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
-            <div className="rounded-circle">3</div>
-          </a>
+            <div className="rounded-circle">{totalProductsAmount}</div>
+          </Link>
 
           <a className="login-button">
             Login

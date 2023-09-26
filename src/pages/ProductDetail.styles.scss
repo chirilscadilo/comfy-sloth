@@ -118,7 +118,6 @@
     .add-btn {
       margin-top: 1.75rem;
       text-transform: uppercase;
-      background-color: white;
       border: none;
       line-height: 1;
       letter-spacing: 0.1rem;
@@ -129,6 +128,7 @@
 
       &:hover {
         cursor: pointer;
+        background-color: #c5a491;
       }
     }
   }

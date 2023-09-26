@@ -36,8 +36,6 @@ export function Products() {
     return true;
   });
 
-  console.log(price);
-
   const GridDisplayProducts = () => {
     setClickGrid(true);
     setClickList(false);

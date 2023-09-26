@@ -2,15 +2,19 @@ import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import productsItems from "../data/items.json";
 import "./ProductDetail.styles.scss";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { increaseProductAmount } from "../store/reducers/ProductSlice";
 
 export const ProductDetail = () => {
   const { id } = useParams();
+  const dispatch = useAppDispatch();
   const [mainImage, setMainImage] = useState<string | null>();
   const [fisrtImage, setFirstImage] = useState(false);
   const [secondImage, setSecondImage] = useState(false);
   const [thirdImage, setThirdImage] = useState(false);
   const [forthtImage, setForthImage] = useState(false);
   const [fithImage, setFithImage] = useState(false);
+  const [productAmount, setProductAmount] = useState(1);
 
   const product = productsItems.find((item) => item.id === id);
 
@@ -119,11 +123,41 @@ export const ProductDetail = () => {
           </p>
           <hr />
           <div className="shopping">
-            <button className="minus">-</button>
-            <h2 className="qty">1</h2>
-            <button className="plus">+</button>
+            <button
+              className="minus"
+              onClick={() =>
+                setProductAmount((prevState) =>
+                  prevState >= 1 ? productAmount - 1 : productAmount
+                )
+              }
+            >
+              -
+            </button>
+            <h2 className="qty">{productAmount}</h2>
+            <button
+              className="plus"
+              onClick={() =>
+                setProductAmount((prevState) =>
+                  prevState >= 1 ? productAmount + 1 : productAmount
+                )
+              }
+            >
+              +
+            </button>
           </div>
-          <button className="add-btn">Add To Card</button>
+          <button
+            className="add-btn"
+            onClick={() =>
+              dispatch(
+                increaseProductAmount({
+                  ...product!,
+                  amount: productAmount >= 1 ? productAmount : 1,
+                })
+              )
+            }
+          >
+            Add To Card
+          </button>
         </div>
       </div>
     </section>
