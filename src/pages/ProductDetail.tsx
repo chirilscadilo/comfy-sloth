@@ -1,13 +1,18 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
-import productsItems from "../data/items.json";
+import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
-import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { useAppDispatch } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/ProductSlice";
+import { Product } from "../models/IProduct";
+import { loadProducts } from "../data/firebase-config";
 
 export const ProductDetail = () => {
   const { id } = useParams();
+
+  const [products, setProducts] = useState<any>([]);
+
   const dispatch = useAppDispatch();
+
   const [mainImage, setMainImage] = useState<string | null>();
   const [fisrtImage, setFirstImage] = useState(false);
   const [secondImage, setSecondImage] = useState(false);
@@ -16,7 +21,16 @@ export const ProductDetail = () => {
   const [fithImage, setFithImage] = useState(false);
   const [productAmount, setProductAmount] = useState(1);
 
-  const product = productsItems.find((item) => item.id === id);
+  useEffect(() => {
+    const getProducts = async () => {
+      const loadingProductsData = await loadProducts();
+      setProducts(loadingProductsData);
+    };
+
+    getProducts();
+  }, []);
+
+  const product = products.find((item: Product) => item.id === id);
 
   return (
     <section>

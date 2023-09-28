@@ -34,7 +34,7 @@ export const productsPrickedSlice = createSlice({
           if (item.id === action.payload.id) {
             return {
               ...item,
-              amount: item.amount + 1,
+              amount: item.amount + action.payload.amount,
             };
           } else {
             return item;

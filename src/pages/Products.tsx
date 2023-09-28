@@ -1,11 +1,14 @@
-import { useState } from "react";
-import productsItems from "../data/items.json";
+import { useState, useEffect } from "react";
 import ProductCard from "../components/productCard/productCard";
 import "./Products.styles.scss";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import AppsIcon from "@mui/icons-material/Apps";
+import { Product } from "../models/IProduct";
+import { loadProducts } from "../data/firebase-config";
 
 export function Products() {
+  const [products, setProducts] = useState<any>([]);
+
   const [clickGrid, setClickGrid] = useState(true);
   const [clickList, setClickList] = useState(false);
   const [productSort, setProductSort] = useState("lowest");
@@ -14,7 +17,16 @@ export function Products() {
   const [companyFilter, setCompanyFilter] = useState<string | null>("");
   const [price, setPrice] = useState<any | null>(1000);
 
-  const filteredProducts = productsItems.filter((product) => {
+  useEffect(() => {
+    const getProducts = async () => {
+      const loadingProductsData = await loadProducts();
+      setProducts(loadingProductsData);
+    };
+
+    getProducts();
+  }, []);
+
+  const filteredProducts = products.filter((product: Product) => {
     if (
       searchValue &&
       !product.name.toLowerCase().includes(searchValue.toLowerCase())
@@ -179,10 +191,10 @@ export function Products() {
         >
           {productSort === "lowest"
             ? filteredProducts
-                .sort((a, b) => {
+                .sort((a: any, b: any) => {
                   return a.price - b.price;
                 })
-                .map((product) => (
+                .map((product: Product) => (
                   <ProductCard
                     {...product}
                     key={product.id}
@@ -191,10 +203,10 @@ export function Products() {
                 ))
             : productSort === "higher"
             ? filteredProducts
-                .sort((a, b) => {
+                .sort((a: any, b: any) => {
                   return b.price - a.price;
                 })
-                .map((product) => (
+                .map((product: Product) => (
                   <ProductCard
                     {...product}
                     key={product.id}
@@ -203,10 +215,10 @@ export function Products() {
                 ))
             : productSort === "alphabetic"
             ? filteredProducts
-                .sort((a, b) => {
+                .sort((a: any, b: any) => {
                   return a.name.localeCompare(b.name);
                 })
-                .map((product) => (
+                .map((product: Product) => (
                   <ProductCard
                     {...product}
                     key={product.id}
@@ -214,10 +226,10 @@ export function Products() {
                   />
                 ))
             : filteredProducts
-                .sort((a, b) => {
+                .sort((a: any, b: any) => {
                   return b.name.localeCompare(a.name);
                 })
-                .map((product) => (
+                .map((product: Product) => (
                   <ProductCard
                     {...product}
                     key={product.id}
