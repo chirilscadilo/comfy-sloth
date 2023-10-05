@@ -47,8 +47,8 @@ export function Navbar() {
             <div className="rounded-circle">{totalProductsAmount}</div>
           </Link>
 
-          <Link to="/signIn" className="login-button">
-            Sign In
+          <Link to="/login" className="login-button">
+            Log In
             <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
           </Link>
         </div>

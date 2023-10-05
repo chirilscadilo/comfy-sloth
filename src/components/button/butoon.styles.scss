@@ -1,0 +1,31 @@
+.button-container {
+  text-decoration: none;
+  text-transform: uppercase;
+  border-color: transparent;
+  background-color: #ab7a5f;
+  color: #eaded7;
+  padding: 0.38rem 0.75rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-color: transparent;
+  border-radius: 0.25rem;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #c5a491;
+  }
+
+  &.google-sign-in {
+    background-color: #222;
+    color: white;
+
+    &:hover {
+      cursor: pointer;
+      color: #222;
+      background-color: white;
+    }
+  }
+}

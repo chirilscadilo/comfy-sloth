@@ -6,7 +6,8 @@ import { About } from "./pages/About";
 import { Navbar } from "./components/navbar/Navbar";
 import { ProductDetail } from "./pages/ProductDetail";
 import { Cart } from "./pages/Cart";
-import { SignIn } from "./pages/SignIn";
+import { LogIn } from "./pages/LogIn";
+import { Register } from "./pages/Register";
 function App() {
   return (
     <>
@@ -18,7 +19,8 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/signIn" element={<SignIn />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Container>
     </>

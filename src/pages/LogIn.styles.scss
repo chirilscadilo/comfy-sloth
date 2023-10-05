@@ -1,0 +1,27 @@
+.log-in-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  .log-in-title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.1rem;
+  }
+
+  .dont-have-account,
+  .log-in-span {
+    margin-top: 1rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+  }
+
+  .register-link {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #ab7a5f;
+    font-size: 1rem;
+  }
+}

@@ -4,7 +4,7 @@ import "./ProductDetail.styles.scss";
 import { useAppDispatch } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/ProductSlice";
 import { Product } from "../models/IProduct";
-import { loadProducts } from "../data/firebase-config";
+import { loadProducts } from "../firebase/firebase-config";
 
 export const ProductDetail = () => {
   const { id } = useParams();

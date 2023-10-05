@@ -4,7 +4,7 @@ import "./Products.styles.scss";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import AppsIcon from "@mui/icons-material/Apps";
 import { Product } from "../models/IProduct";
-import { loadProducts } from "../data/firebase-config";
+import { loadProducts } from "../firebase/firebase-config";
 
 export function Products() {
   const [products, setProducts] = useState<any>([]);
