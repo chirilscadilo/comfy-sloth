@@ -62,12 +62,12 @@ export const createUserDocumentFromAuth = async (
 
   //if user does not exist - it will be added to firebase list
   if (!userSnapshot.exists()) {
-    const { name, email } = userAuth;
+    const { displayName, email } = userAuth;
     const createdAt = new Date();
 
     try {
       await setDoc(userDocRef, {
-        name,
+        displayName,
         email,
         createdAt,
         ...additionalInformation,

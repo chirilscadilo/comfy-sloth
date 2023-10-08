@@ -5,10 +5,13 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import MenuBurger from "../menuBurger/menuBurger";
 import { useAppSelector } from "../../hooks/hooks";
+import { signOutUser } from "../../firebase/firebase-config";
+
 export function Navbar() {
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
+  const currentUser = useAppSelector((state) => state.user.displayName);
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
   const [isMenuClicked, setIsMenuCLicked] = useState(false);
 
@@ -21,6 +24,12 @@ export function Navbar() {
     }
     setIsMenuCLicked(!isMenuClicked);
   };
+
+  const handleSignOut = async () => {
+    await signOutUser();
+  };
+
+  console.log(currentUser);
   return (
     <div>
       <nav className="navbar-container">
@@ -46,11 +55,16 @@ export function Navbar() {
             <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
             <div className="rounded-circle">{totalProductsAmount}</div>
           </Link>
-
-          <Link to="/login" className="login-button">
-            Log In
-            <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
-          </Link>
+          {currentUser ? (
+            <button onClick={handleSignOut} className="login-button">
+              Sign Out
+            </button>
+          ) : (
+            <Link to="/login" className="login-button">
+              Log In
+              <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
+            </Link>
+          )}
         </div>
 
         <div className="burger-container" onClick={updateMenu}>

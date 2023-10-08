@@ -2,19 +2,22 @@ import {
   createUserDocumentFromAuth,
   createUserWithEmailAndPasswordFromAuth,
 } from "../../firebase/firebase-config";
-import "./signUpform.styles.scss";
+import "./registerForm.styles..scss";
 import { useState } from "react";
+import { getCurrentUser } from "../../store/reducers/UserSlice";
+import { useAppDispatch } from "../../hooks/hooks";
 
 const defaultFromFields = {
-  name: "",
+  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
 
-export const SignUpForm = () => {
+export const RegisterForm = () => {
+  const dispatch = useAppDispatch();
   const [formFields, setFormFields] = useState(defaultFromFields);
-  const { name, email, password, confirmPassword } = formFields;
+  const { displayName, email, password, confirmPassword } = formFields;
 
   const resetFromFields = () => {
     setFormFields(defaultFromFields);
@@ -31,7 +34,10 @@ export const SignUpForm = () => {
         email,
         password
       );
-      await createUserDocumentFromAuth(user, { name });
+      dispatch(getCurrentUser(user));
+
+      await createUserDocumentFromAuth(user, { displayName });
+
       resetFromFields();
     } catch (error: any) {
       if (error.message === "auth/email-already-in-use") {
@@ -49,10 +55,10 @@ export const SignUpForm = () => {
     <form className="sign-up-form" action="" onSubmit={handleSubmitSignUp}>
       <input
         type="text"
-        name="name"
+        name="displayName"
         required
         placeholder="Name"
-        value={name}
+        value={displayName}
         onChange={handleChange}
       />
       <input

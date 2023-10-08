@@ -5,6 +5,8 @@ import {
   signInWithEmailAndPasswordFromAuth,
 } from "../../firebase/firebase-config";
 import { useState } from "react";
+import { getCurrentUser } from "../../store/reducers/UserSlice";
+import { useAppDispatch } from "../../hooks/hooks";
 
 const defaultFromFields = {
   email: "",
@@ -12,6 +14,8 @@ const defaultFromFields = {
 };
 
 export const LogInForm = () => {
+  const dispatch = useAppDispatch();
+
   const [formFileds, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFileds;
 
@@ -21,7 +25,9 @@ export const LogInForm = () => {
 
   const logGoogleUser = async () => {
     const { user } = await signInWithGooglePopup();
-    const userDocRef = await createUserDocumentFromAuth(user);
+    await createUserDocumentFromAuth(user);
+
+    dispatch(getCurrentUser(user));
   };
 
   const handleSubmitLogIn = async (event: any) => {
@@ -31,6 +37,8 @@ export const LogInForm = () => {
         email,
         password
       );
+
+      dispatch(getCurrentUser(user));
       resetFromFields();
     } catch (error: any) {
       switch (error.code) {
