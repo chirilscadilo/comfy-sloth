@@ -10,8 +10,6 @@ interface ProductState {
   products: Product[];
   totalAmount: number;
   totalSum: number;
-  // isLoading: boolean;
-  // error: string;
 }
 
 const initialState: ProductState = {

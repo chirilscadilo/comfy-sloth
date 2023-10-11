@@ -150,6 +150,16 @@
       cursor: pointer;
       padding: 10px;
     }
+    .loading {
+      margin-top: 5rem;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.1rem;
+      font-size: 2rem;
+    }
   }
 }
 

@@ -14,6 +14,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 const app = initializeApp({
@@ -43,13 +44,15 @@ export const loadProducts = async () => {
 };
 
 //auth
+export const auth = getAuth();
+
+//google Sign IN
 const provider = new GoogleAuthProvider();
 //adding this so user must select an account when Signing in with Google
 provider.setCustomParameters({
   prompt: "select_account",
 });
 
-export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 //users collection methods
@@ -57,6 +60,8 @@ export const createUserDocumentFromAuth = async (
   userAuth: any,
   additionalInformation = {}
 ) => {
+  if (!userAuth) return;
+
   const userDocRef = doc(db, "users", userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
@@ -97,5 +102,3 @@ export const signInWithEmailAndPasswordFromAuth = async (
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
-
-export const signOutUser = async () => await signOut(auth);

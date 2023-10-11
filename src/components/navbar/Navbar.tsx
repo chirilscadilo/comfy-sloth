@@ -4,14 +4,18 @@ import "./Navbar.styles.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import MenuBurger from "../menuBurger/menuBurger";
-import { useAppSelector } from "../../hooks/hooks";
-import { signOutUser } from "../../firebase/firebase-config";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { removeUser } from "../../store/reducers/UserSlice";
+import { useAuth } from "../../hooks/use-auth";
 
 export function Navbar() {
+  const dispatch = useAppDispatch();
+
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
-  const currentUser = useAppSelector((state) => state.user.displayName);
+  const { isAuth } = useAuth();
+
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
   const [isMenuClicked, setIsMenuCLicked] = useState(false);
 
@@ -25,11 +29,6 @@ export function Navbar() {
     setIsMenuCLicked(!isMenuClicked);
   };
 
-  const handleSignOut = async () => {
-    await signOutUser();
-  };
-
-  console.log(currentUser);
   return (
     <div>
       <nav className="navbar-container">
@@ -55,10 +54,11 @@ export function Navbar() {
             <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
             <div className="rounded-circle">{totalProductsAmount}</div>
           </Link>
-          {currentUser ? (
-            <button onClick={handleSignOut} className="login-button">
+          {/* isAuth is a boolean returned from use-auth hook. If it's true - redux state has a user value  */}
+          {isAuth ? (
+            <a onClick={() => dispatch(removeUser())} className="login-button">
               Sign Out
-            </button>
+            </a>
           ) : (
             <Link to="/login" className="login-button">
               Log In

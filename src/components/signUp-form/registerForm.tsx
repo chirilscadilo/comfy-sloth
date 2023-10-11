@@ -34,9 +34,10 @@ export const RegisterForm = () => {
         email,
         password
       );
-      dispatch(getCurrentUser(user));
 
       await createUserDocumentFromAuth(user, { displayName });
+
+      dispatch(getCurrentUser({ ...user, displayName }));
 
       resetFromFields();
     } catch (error: any) {

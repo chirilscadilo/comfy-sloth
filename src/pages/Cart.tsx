@@ -8,11 +8,14 @@ import {
   increaseProductAmount,
 } from "../store/reducers/ProductSlice";
 import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/use-auth";
 
 export const Cart = () => {
   const pickedProduct = useAppSelector((state) => state.products);
   // const totalOrderSum = useAppSelector((state) => state.products.totalSum);
   const dispatch = useAppDispatch();
+
+  const { isAuth } = useAuth();
 
   const productSubtotal = (id: string) => {
     const productPrice = pickedProduct.products.find(
@@ -111,7 +114,13 @@ export const Cart = () => {
               <span>${(Number(totalOrderSum()) + 5.34).toFixed(2)}</span>
             </h4>
           </article>
-          <button className="login-btn">Login</button>
+          {isAuth ? (
+            <button className="login-btn">Order</button>
+          ) : (
+            <Link to="/login">
+              <button className="login-btn">Login</button>
+            </Link>
+          )}
         </div>
       </section>
     </section>

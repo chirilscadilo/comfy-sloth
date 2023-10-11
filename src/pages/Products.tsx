@@ -8,6 +8,7 @@ import { loadProducts } from "../firebase/firebase-config";
 
 export function Products() {
   const [products, setProducts] = useState<any>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [clickGrid, setClickGrid] = useState(true);
   const [clickList, setClickList] = useState(false);
@@ -21,6 +22,7 @@ export function Products() {
     const getProducts = async () => {
       const loadingProductsData = await loadProducts();
       setProducts(loadingProductsData);
+      setIsLoading(false);
     };
 
     getProducts();
@@ -184,59 +186,63 @@ export function Products() {
           </form>
         </div>
 
-        <div
-          className={
-            clickList ? "products-container-list" : "products-container"
-          }
-        >
-          {productSort === "lowest"
-            ? filteredProducts
-                .sort((a: any, b: any) => {
-                  return a.price - b.price;
-                })
-                .map((product: Product) => (
-                  <ProductCard
-                    {...product}
-                    key={product.id}
-                    clickList={clickList}
-                  />
-                ))
-            : productSort === "higher"
-            ? filteredProducts
-                .sort((a: any, b: any) => {
-                  return b.price - a.price;
-                })
-                .map((product: Product) => (
-                  <ProductCard
-                    {...product}
-                    key={product.id}
-                    clickList={clickList}
-                  />
-                ))
-            : productSort === "alphabetic"
-            ? filteredProducts
-                .sort((a: any, b: any) => {
-                  return a.name.localeCompare(b.name);
-                })
-                .map((product: Product) => (
-                  <ProductCard
-                    {...product}
-                    key={product.id}
-                    clickList={clickList}
-                  />
-                ))
-            : filteredProducts
-                .sort((a: any, b: any) => {
-                  return b.name.localeCompare(a.name);
-                })
-                .map((product: Product) => (
-                  <ProductCard
-                    {...product}
-                    key={product.id}
-                    clickList={clickList}
-                  />
-                ))}
-        </div>
+        {isLoading ? (
+          <h2 className="loading">Loading...</h2>
+        ) : (
+          <div
+            className={
+              clickList ? "products-container-list" : "products-container"
+            }
+          >
+            {productSort === "lowest"
+              ? filteredProducts
+                  .sort((a: any, b: any) => {
+                    return a.price - b.price;
+                  })
+                  .map((product: Product) => (
+                    <ProductCard
+                      {...product}
+                      key={product.id}
+                      clickList={clickList}
+                    />
+                  ))
+              : productSort === "higher"
+              ? filteredProducts
+                  .sort((a: any, b: any) => {
+                    return b.price - a.price;
+                  })
+                  .map((product: Product) => (
+                    <ProductCard
+                      {...product}
+                      key={product.id}
+                      clickList={clickList}
+                    />
+                  ))
+              : productSort === "alphabetic"
+              ? filteredProducts
+                  .sort((a: any, b: any) => {
+                    return a.name.localeCompare(b.name);
+                  })
+                  .map((product: Product) => (
+                    <ProductCard
+                      {...product}
+                      key={product.id}
+                      clickList={clickList}
+                    />
+                  ))
+              : filteredProducts
+                  .sort((a: any, b: any) => {
+                    return b.name.localeCompare(a.name);
+                  })
+                  .map((product: Product) => (
+                    <ProductCard
+                      {...product}
+                      key={product.id}
+                      clickList={clickList}
+                    />
+                  ))}
+          </div>
+        )}
       </section>
     </div>
   );
