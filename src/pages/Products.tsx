@@ -5,6 +5,7 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 import AppsIcon from "@mui/icons-material/Apps";
 import { Product } from "../models/IProduct";
 import { loadProducts } from "../firebase/firebase-config";
+import { Spinner } from "../components/spinner/spinner";
 
 export function Products() {
   const [products, setProducts] = useState<any>([]);
@@ -187,7 +188,7 @@ export function Products() {
         </div>
 
         {isLoading ? (
-          <h2 className="loading">Loading...</h2>
+          <Spinner />
         ) : (
           <div
             className={

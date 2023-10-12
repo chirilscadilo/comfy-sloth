@@ -5,6 +5,7 @@ import { useAppDispatch } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/ProductSlice";
 import { Product } from "../models/IProduct";
 import { loadProducts } from "../firebase/firebase-config";
+import { Spinner } from "../components/spinner/spinner";
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -38,7 +39,7 @@ export const ProductDetail = () => {
   return (
     <>
       {isLoading ? (
-        <h2 className="loading">Loading...</h2>
+        <Spinner />
       ) : (
         <section>
           <a className="btn" onClick={() => navigate(-1)}>

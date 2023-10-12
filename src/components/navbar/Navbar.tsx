@@ -61,7 +61,7 @@ export function Navbar() {
             </a>
           ) : (
             <Link to="/login" className="login-button">
-              Log In
+              Login
               <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
             </Link>
           )}

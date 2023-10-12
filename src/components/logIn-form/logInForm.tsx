@@ -30,6 +30,7 @@ export const LogInForm = () => {
     await createUserDocumentFromAuth(user);
 
     dispatch(getCurrentUser(user));
+    navigate(-1);
   };
 
   const handleSubmitLogIn = async (event: any) => {
