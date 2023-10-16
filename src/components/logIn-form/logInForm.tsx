@@ -3,8 +3,9 @@ import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
   signInWithEmailAndPasswordFromAuth,
+  getUserDaraFromDocs,
 } from "../../firebase/firebase-config";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getCurrentUser } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +22,10 @@ export const LogInForm = () => {
   const [formFileds, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFileds;
 
+  useEffect(() => {
+    const getUser = async () => {};
+  }, []);
+
   const resetFromFields = () => {
     setFormFields(defaultFromFields);
   };
@@ -29,7 +34,7 @@ export const LogInForm = () => {
     const { user } = await signInWithGooglePopup();
     await createUserDocumentFromAuth(user);
 
-    dispatch(getCurrentUser(user));
+    dispatch(getCurrentUser({ ...user, displayName: user.displayName }));
     navigate(-1);
   };
 
@@ -40,7 +45,9 @@ export const LogInForm = () => {
         email,
         password
       );
-      dispatch(getCurrentUser(user));
+      const getDisplayName = await getUserDaraFromDocs(user.uid);
+
+      dispatch(getCurrentUser({ ...user, displayName: getDisplayName }));
       resetFromFields();
       navigate(-1);
     } catch (error: any) {

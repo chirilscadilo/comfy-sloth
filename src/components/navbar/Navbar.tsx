@@ -14,7 +14,7 @@ export function Navbar() {
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
-  const { isAuth } = useAuth();
+  const { isAuth, displayName } = useAuth();
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
   const [isMenuClicked, setIsMenuCLicked] = useState(false);
@@ -57,7 +57,7 @@ export function Navbar() {
           {/* isAuth is a boolean returned from use-auth hook. If it's true - redux state has a user value  */}
           {isAuth ? (
             <a onClick={() => dispatch(removeUser())} className="login-button">
-              Sign Out
+              {displayName}
             </a>
           ) : (
             <Link to="/login" className="login-button">

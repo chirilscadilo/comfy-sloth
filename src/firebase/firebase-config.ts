@@ -13,8 +13,6 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
 } from "firebase/auth";
 
 const app = initializeApp({
@@ -43,6 +41,15 @@ export const loadProducts = async () => {
   return data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 };
 
+export const getUserDaraFromDocs = async (id: string) => {
+  const data = await getDoc(doc(db, "users", id));
+  if (data.exists()) {
+    return data.data().displayName;
+  } else {
+    console.log("no document");
+  }
+};
+
 //auth
 export const auth = getAuth();
 
@@ -56,6 +63,7 @@ provider.setCustomParameters({
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 //users collection methods
+//creates a document with user in Storage database
 export const createUserDocumentFromAuth = async (
   userAuth: any,
   additionalInformation = {}
