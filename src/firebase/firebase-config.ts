@@ -41,7 +41,7 @@ export const loadProducts = async () => {
   return data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 };
 
-export const getUserDaraFromDocs = async (id: string) => {
+export const getUserDataFromDocs = async (id: string) => {
   const data = await getDoc(doc(db, "users", id));
   if (data.exists()) {
     return data.data().displayName;

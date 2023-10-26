@@ -4,13 +4,11 @@ import "./Navbar.styles.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import MenuBurger from "../menuBurger/menuBurger";
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { removeUser } from "../../store/reducers/UserSlice";
+import { useAppSelector } from "../../hooks/hooks";
 import { useAuth } from "../../hooks/use-auth";
+import { DropdownMenu } from "../dropDownMenu/dropDownMenu";
 
 export function Navbar() {
-  const dispatch = useAppDispatch();
-
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
@@ -29,8 +27,10 @@ export function Navbar() {
     setIsMenuCLicked(!isMenuClicked);
   };
 
+  const displayNameArr: any = displayName?.split(/ (.*)/);
+
   return (
-    <div>
+    <div className="container">
       <nav className="navbar-container">
         <Link to="/">
           <img src="../src/assets/logo.svg" alt="Logo" />
@@ -56,13 +56,11 @@ export function Navbar() {
           </Link>
           {/* isAuth is a boolean returned from use-auth hook. If it's true - redux state has a user value  */}
           {isAuth ? (
-            <a onClick={() => dispatch(removeUser())} className="login-button">
-              {displayName}
-            </a>
+            <DropdownMenu displayName={displayNameArr[0]} />
           ) : (
             <Link to="/login" className="login-button">
               Login
-              <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
+              {/* <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} /> */}
             </Link>
           )}
         </div>

@@ -11,8 +11,8 @@ import { Register } from "./pages/Register";
 function App() {
   return (
     <>
+      <Navbar />
       <Container>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

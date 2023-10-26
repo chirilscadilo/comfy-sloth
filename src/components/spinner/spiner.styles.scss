@@ -1,7 +1,7 @@
 .spinner {
   margin-top: 7rem;
-  min-width: 150px;
-  height: 150px;
+  min-width: 100px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,8 +16,8 @@
 
   .spinner-sector {
     position: absolute;
-    min-width: 150px;
-    height: 150px;
+    min-width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 15px solid transparent;
     animation: rotate var(--duration) var(--timing) infinite;
