@@ -34,6 +34,10 @@
         height: 75px;
         max-width: 100px;
         object-fit: cover;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
       .product-title {
         p {
@@ -188,24 +192,10 @@
         letter-spacing: 0.1rem;
       }
     }
-  }
-  .login-btn {
-    width: 100%;
-    margin-top: 1rem;
-    background-color: #ab7a5f;
-    color: white;
-    padding: 0.25rem 0.5rem;
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    letter-spacing: 0.1rem;
-    font-size: 1rem;
-    line-height: 1.25;
-    border-color: transparent;
-    border-radius: 0.25rem;
-
-    &:hover {
-      cursor: pointer;
-      background-color: #c5a491;
+    .total-card-btn {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 }

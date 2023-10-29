@@ -1,3 +1,4 @@
+import { Button } from "../button/button";
 import "./productCard.styles.scss";
 import { Link } from "react-router-dom";
 
@@ -29,8 +30,8 @@ const ProductCard = ({
           <h5>${price}</h5>
           <p>{description.substring(0, 150)}...</p>
 
-          <Link to={`/product/${id}`} className="btn">
-            Details
+          <Link to={`/product/${id}`}>
+            <Button buttonType="simple">Details</Button>
           </Link>
         </div>
       </article>

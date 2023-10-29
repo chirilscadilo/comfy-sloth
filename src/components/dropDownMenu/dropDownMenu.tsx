@@ -3,24 +3,21 @@ import { useState, useEffect, useRef } from "react";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { ModalWindow } from "../modalWindow/modalWIndw";
-import { useAppDispatch } from "../../hooks/hooks";
-import { removeUser } from "../../store/reducers/UserSlice";
+
+import { Link } from "react-router-dom";
 
 type DropDownProps = {
   displayName: string;
 };
 export const DropdownMenu = ({ displayName }: DropDownProps) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+
   let menuRef = useRef<any>();
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     let handler = (event: any) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setDropdownOpen(false);
-        setOpenModal(false);
       }
     };
     if (isDropdownOpen) {
@@ -36,11 +33,6 @@ export const DropdownMenu = ({ displayName }: DropDownProps) => {
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleRemoveUSer = () => {
-    dispatch(removeUser());
-    setOpenModal(false);
   };
 
   return (
@@ -63,28 +55,10 @@ export const DropdownMenu = ({ displayName }: DropDownProps) => {
             <PermIdentityIcon />
             Account
           </a>
-          <a
-            href=""
-            onClick={(event) => event.preventDefault()}
-            className="menu-item"
-          >
+          <Link to="/logOut" className="menu-item">
             <ExitToAppIcon />
-
-            <div className="open-model">
-              <button
-                className="open-model-btn"
-                onClick={() => setOpenModal(true)}
-              >
-                Logout
-              </button>
-              {openModal && (
-                <ModalWindow
-                  handleClose={() => setOpenModal(false)}
-                  handleRemoveUSer={handleRemoveUSer}
-                ></ModalWindow>
-              )}
-            </div>
-          </a>
+            Logout
+          </Link>
         </div>
       )}
     </div>

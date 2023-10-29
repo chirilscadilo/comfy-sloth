@@ -9,6 +9,8 @@ import { useState } from "react";
 import { getCurrentUser } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { ModalWindow } from "../modalWindow/modalWIndw";
+import { Button, ButtonTypes } from "../button/button";
 
 const defaultFromFields = {
   email: "",
@@ -21,6 +23,7 @@ export const LogInForm = () => {
 
   const [formFileds, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFileds;
+  const [error, setError] = useState<string | null>(null);
 
   const resetFromFields = () => {
     setFormFields(defaultFromFields);
@@ -49,16 +52,16 @@ export const LogInForm = () => {
     } catch (error: any) {
       switch (error.code) {
         case "auth/wrong-password":
-          alert("incorect password for email");
+          setError("Incorect password");
           break;
         case "auth/user-not-found":
-          alert("no user associated with this email");
+          setError("No user associated with this email");
           break;
         case "auth/invalid-login-credentials":
-          alert("incorect password for email");
+          setError("Incorect password or email");
           break;
         default:
-          console.log(error);
+          setError(error.code);
       }
     }
   };
@@ -88,13 +91,19 @@ export const LogInForm = () => {
         onChange={handleChange}
       />
       <div className="log-in-btn-container">
-        <button type="submit" className="log-in-btn">
+        <Button type={ButtonTypes.Submit} buttonType="simple">
           Log In
-        </button>
-        <button onClick={logGoogleUser} className="google-log-in">
+        </Button>
+        <Button onClick={logGoogleUser} buttonType="google">
           Google Sign In
-        </button>
+        </Button>
       </div>
+      {error && (
+        <ModalWindow
+          text={error}
+          handleClose={() => setError(null)}
+        ></ModalWindow>
+      )}
     </form>
   );
 };

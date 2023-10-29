@@ -4,7 +4,8 @@ import "./Navbar.styles.scss";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import MenuBurger from "../menuBurger/menuBurger";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
+import { removeUser } from "../../store/reducers/UserSlice";
 import { useAuth } from "../../hooks/use-auth";
 import { DropdownMenu } from "../dropDownMenu/dropDownMenu";
 
@@ -12,6 +13,7 @@ export function Navbar() {
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
+  const dispatch = useAppDispatch();
   const { isAuth, displayName } = useAuth();
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -50,7 +52,6 @@ export function Navbar() {
 
         <div className="navbar-cart-login">
           <Link to="/cart" className="shopping-cart-button">
-            Cart
             <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
             <div className="rounded-circle">{totalProductsAmount}</div>
           </Link>
@@ -58,9 +59,9 @@ export function Navbar() {
           {isAuth ? (
             <DropdownMenu displayName={displayNameArr[0]} />
           ) : (
+            // <button onClick={() => dispatch(removeUser())}>Sign Out</button>
             <Link to="/login" className="login-button">
-              Login
-              {/* <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} /> */}
+              <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
             </Link>
           )}
         </div>

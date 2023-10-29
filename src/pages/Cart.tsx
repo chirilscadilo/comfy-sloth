@@ -9,6 +9,7 @@ import {
 } from "../store/reducers/ProductSlice";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
+import { Button } from "../components/button/button";
 
 export const Cart = () => {
   const pickedProduct = useAppSelector((state) => state.products);
@@ -43,7 +44,9 @@ export const Cart = () => {
       {pickedProduct.products.map((product) => (
         <article className="cart-content">
           <div className="product-name-container">
-            <img src={product.img} alt="product image" />
+            <Link to={`/product/${product.id}`}>
+              <img src={product.img} alt="product image" />
+            </Link>
             <div className="product-title">
               <p>{product.name}</p>
               <p className="product-price-small">${product.price}</p>
@@ -85,15 +88,15 @@ export const Cart = () => {
 
       <hr />
       <div className="btn-container">
-        <Link to="/products" className="continue-btn">
-          Continue Shopping
+        <Link to="/products">
+          <Button buttonType="simple">Continue Shopping</Button>
         </Link>
-        <button
-          className="clear-btn"
+        <Button
+          buttonType="google"
           onClick={() => dispatch(removeAllProducts())}
         >
           Clear Shopping Cart
-        </button>
+        </Button>
       </div>
 
       <section className="total-card-container">
@@ -114,21 +117,23 @@ export const Cart = () => {
               <span>${(Number(totalOrderSum()) + 5.34).toFixed(2)}</span>
             </h4>
           </article>
-          {isAuth ? (
-            <button className="login-btn">Order</button>
-          ) : (
-            <Link to="/login">
-              <button className="login-btn">Login</button>
-            </Link>
-          )}
+          <div className="total-card-btn">
+            {isAuth ? (
+              <Button buttonType="simple">Order</Button>
+            ) : (
+              <Link to="/login">
+                <Button buttonType="simple">Login</Button>
+              </Link>
+            )}
+          </div>
         </div>
       </section>
     </section>
   ) : (
     <div className="no-products-container">
       <h2 className="no-products-title">Your cart is Empty</h2>
-      <Link to="/products" className="fill-btn">
-        Fill It
+      <Link to="/products">
+        <Button buttonType="simple">Fill It</Button>
       </Link>
     </div>
   );

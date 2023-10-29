@@ -6,6 +6,7 @@ import { increaseProductAmount } from "../store/reducers/ProductSlice";
 import { Product } from "../models/IProduct";
 import { loadProducts } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
+import { Button } from "../components/button/button";
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -42,9 +43,9 @@ export const ProductDetail = () => {
         <Spinner />
       ) : (
         <section>
-          <a className="btn" onClick={() => navigate(-1)}>
+          <Button buttonType="simple" onClick={() => navigate(-1)}>
             Back
-          </a>
+          </Button>
           <div className="product-container">
             <div className="img-container">
               <img
@@ -175,8 +176,8 @@ export const ProductDetail = () => {
                   +
                 </button>
               </div>
-              <button
-                className="add-btn"
+              <Button
+                buttonType="simple"
                 onClick={() =>
                   dispatch(
                     increaseProductAmount({
@@ -187,7 +188,7 @@ export const ProductDetail = () => {
                 }
               >
                 Add To Card
-              </button>
+              </Button>
             </div>
           </div>
         </section>

@@ -6,6 +6,8 @@ import "./registerForm.styles..scss";
 import { useState } from "react";
 import { getCurrentUser } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/hooks";
+import { ModalWindow } from "../modalWindow/modalWIndw";
+import { Button, ButtonTypes } from "../button/button";
 
 const defaultFromFields = {
   displayName: "",
@@ -18,6 +20,7 @@ export const RegisterForm = () => {
   const dispatch = useAppDispatch();
   const [formFields, setFormFields] = useState(defaultFromFields);
   const { displayName, email, password, confirmPassword } = formFields;
+  const [error, setError] = useState<string | null>(null);
 
   const resetFromFields = () => {
     setFormFields(defaultFromFields);
@@ -26,7 +29,7 @@ export const RegisterForm = () => {
   const handleSubmitSignUp = async (event: any) => {
     event.preventDefault();
     if (password !== confirmPassword) {
-      alert("Password does not match");
+      setError("Password does not match");
       return;
     }
     try {
@@ -41,10 +44,13 @@ export const RegisterForm = () => {
 
       resetFromFields();
     } catch (error: any) {
-      if (error.message === "auth/email-already-in-use") {
-        alert("User already created.");
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          setError("Account already created");
+          break;
+        default:
+          setError(error.code);
       }
-      console.log("error creating the user", error.message);
     }
   };
 
@@ -86,9 +92,16 @@ export const RegisterForm = () => {
         value={confirmPassword}
         onChange={handleChange}
       />
-      <button className="sign-up-btn" type="submit">
+      <Button buttonType="simple" type={ButtonTypes.Submit}>
         Sign Up
-      </button>
+      </Button>
+
+      {error && (
+        <ModalWindow
+          text={error}
+          handleClose={() => setError(null)}
+        ></ModalWindow>
+      )}
     </form>
   );
 };
