@@ -31,8 +31,9 @@ export const ProductDetail = () => {
       setProducts(loadingProductsData);
       setIsLoading(false);
     };
-
-    getProducts();
+    return () => {
+      getProducts();
+    };
   }, []);
 
   const product = products.find((item: Product) => item.id === id);

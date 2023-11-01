@@ -12,10 +12,12 @@ import {
 import storage from "redux-persist/lib/storage";
 import productsPrickedSlice from "./reducers/ProductSlice";
 import currentUserSlice from "./reducers/UserSlice";
+import favoriteSlice from "./reducers/FavoriteSlice";
 
 const reducers = combineReducers({
   products: productsPrickedSlice,
   user: currentUserSlice,
+  favorite: favoriteSlice,
 });
 
 const persistConfig = {

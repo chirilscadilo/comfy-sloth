@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Product } from "../../models/IProduct";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface RemoveProduct {
   id: string | undefined;
@@ -39,6 +38,21 @@ export const productsPrickedSlice = createSlice({
           }
         });
       }
+    },
+
+    increaseProductAmountByOne(state, action: PayloadAction<Product>) {
+      state.totalAmount += 1;
+      state.totalSum += action.payload.amount * action.payload.price;
+      state.products = state.products.map((item) => {
+        if (item.id === action.payload.id) {
+          return {
+            ...item,
+            amount: item.amount + 1,
+          };
+        } else {
+          return item;
+        }
+      });
     },
 
     decreaseProductAmount(state, action: PayloadAction<Product>) {
@@ -84,6 +98,7 @@ export const productsPrickedSlice = createSlice({
 
 export const {
   increaseProductAmount,
+  increaseProductAmountByOne,
   removeCartProductLine,
   removeAllProducts,
   decreaseProductAmount,

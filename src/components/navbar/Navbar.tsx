@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.styles.scss";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import MenuBurger from "../menuBurger/menuBurger";
-import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
-import { removeUser } from "../../store/reducers/UserSlice";
+import { useAppSelector } from "../../hooks/hooks";
 import { useAuth } from "../../hooks/use-auth";
 import { DropdownMenu } from "../dropDownMenu/dropDownMenu";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 
 export function Navbar() {
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
-  const dispatch = useAppDispatch();
+
   const { isAuth, displayName } = useAuth();
 
   const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
@@ -51,15 +51,21 @@ export function Navbar() {
         </div>
 
         <div className="navbar-cart-login">
+          <Link to="/favorite" className="shopping-cart-button">
+            <FavoriteBorderOutlinedIcon
+              sx={{ color: "black", fontSize: "28px", margin: "8px" }}
+            />
+          </Link>
           <Link to="/cart" className="shopping-cart-button">
-            <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
+            <ShoppingCartOutlinedIcon
+              sx={{ fontSize: "28px", margin: "8px" }}
+            />
             <div className="rounded-circle">{totalProductsAmount}</div>
           </Link>
           {/* isAuth is a boolean returned from use-auth hook. If it's true - redux state has a user value  */}
           {isAuth ? (
             <DropdownMenu displayName={displayNameArr[0]} />
           ) : (
-            // <button onClick={() => dispatch(removeUser())}>Sign Out</button>
             <Link to="/login" className="login-button">
               <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
             </Link>

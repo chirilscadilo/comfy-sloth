@@ -5,7 +5,7 @@ import {
   removeAllProducts,
   removeCartProductLine,
   decreaseProductAmount,
-  increaseProductAmount,
+  increaseProductAmountByOne,
 } from "../store/reducers/ProductSlice";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
@@ -13,14 +13,13 @@ import { Button } from "../components/button/button";
 
 export const Cart = () => {
   const pickedProduct = useAppSelector((state) => state.products);
-  // const totalOrderSum = useAppSelector((state) => state.products.totalSum);
   const dispatch = useAppDispatch();
 
   const { isAuth } = useAuth();
 
   const productSubtotal = (id: string) => {
     const productPrice = pickedProduct.products.find(
-      (product) => product.id === id
+      (product: any) => product.id === id
     );
     return productPrice!.amount * productPrice!.price;
   };
@@ -63,7 +62,7 @@ export const Cart = () => {
             {product.amount}
             <button
               className="plus"
-              onClick={() => dispatch(increaseProductAmount(product!))}
+              onClick={() => dispatch(increaseProductAmountByOne(product!))}
             >
               +
             </button>

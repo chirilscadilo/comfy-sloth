@@ -6,8 +6,12 @@ import AppsIcon from "@mui/icons-material/Apps";
 import { Product } from "../models/IProduct";
 import { loadProducts } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
+import { useAppSelector } from "../hooks/hooks";
 
 export function Products() {
+  const favoriteProducts = useAppSelector(
+    (state) => state.favorite.productFavorite
+  );
   const [products, setProducts] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -26,7 +30,9 @@ export function Products() {
       setIsLoading(false);
     };
 
-    getProducts();
+    return () => {
+      getProducts();
+    };
   }, []);
 
   const filteredProducts = products.filter((product: Product) => {
@@ -205,6 +211,11 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
+                      clickFavorite={
+                        favoriteProducts.find((item) => item.id === product.id)
+                          ? true
+                          : false
+                      }
                     />
                   ))
               : productSort === "higher"
