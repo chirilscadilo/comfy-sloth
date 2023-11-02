@@ -1,14 +1,23 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
-import { useAppDispatch } from "../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/ProductSlice";
 import { Product } from "../models/IProduct";
 import { loadProducts } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { Button } from "../components/button/button";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import {
+  getProductFavorite,
+  removeProductFavorite,
+} from "../store/reducers/FavoriteSlice";
 
 export const ProductDetail = () => {
+  const favoriteProducts = useAppSelector(
+    (state) => state.favorite.productFavorite
+  );
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -37,6 +46,7 @@ export const ProductDetail = () => {
   }, []);
 
   const product = products.find((item: Product) => item.id === id);
+  const isFavoriteProduct = favoriteProducts.find((item) => item.id === id);
 
   return (
     <>
@@ -177,19 +187,48 @@ export const ProductDetail = () => {
                   +
                 </button>
               </div>
-              <Button
-                buttonType="simple"
-                onClick={() =>
-                  dispatch(
-                    increaseProductAmount({
-                      ...product!,
-                      amount: productAmount >= 1 ? productAmount : 1,
-                    })
-                  )
-                }
-              >
-                Add To Card
-              </Button>
+              <div className="product-actions">
+                <Button
+                  buttonType="simple"
+                  onClick={() =>
+                    dispatch(
+                      increaseProductAmount({
+                        ...product!,
+                        amount: productAmount >= 1 ? productAmount : 1,
+                      })
+                    )
+                  }
+                >
+                  Add To Card
+                </Button>
+                {isFavoriteProduct ? (
+                  <a
+                    onClick={() => dispatch(removeProductFavorite({ id: id }))}
+                  >
+                    <FavoriteIcon
+                      sx={{ marginTop: "1rem", fontSize: "30px" }}
+                    />
+                  </a>
+                ) : (
+                  <a
+                    onClick={() =>
+                      dispatch(
+                        getProductFavorite({
+                          id: product?.id,
+                          name: product?.name,
+                          price: product?.price,
+                          img: product?.img,
+                          description: product?.description,
+                        })
+                      )
+                    }
+                  >
+                    <FavoriteBorderIcon
+                      sx={{ marginTop: "1rem", fontSize: "30px" }}
+                    />
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </section>

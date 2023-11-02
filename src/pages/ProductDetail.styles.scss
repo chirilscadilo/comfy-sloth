@@ -120,21 +120,10 @@
       }
     }
 
-    .add-btn {
-      margin-top: 1.75rem;
-      text-transform: uppercase;
-      border: none;
-      line-height: 1;
-      letter-spacing: 0.1rem;
-      color: white;
-      background-color: #ab7a5f;
-      border-radius: 0.25rem;
-      padding: 0.75rem 0.75rem;
-
-      &:hover {
-        cursor: pointer;
-        background-color: #c5a491;
-      }
+    .product-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
     }
   }
 }

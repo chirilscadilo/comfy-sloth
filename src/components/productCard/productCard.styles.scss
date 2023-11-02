@@ -90,19 +90,10 @@
       margin-bottom: 0.75rem;
     }
 
-    .btn {
-      cursor: pointer;
-      text-decoration: none;
-      text-transform: uppercase;
-      color: white;
-      background-color: #b99179;
-      display: inline-block;
-      border-radius: 0.25rem;
-      font-family: "Roboto", sans-serif;
-      font-weight: 400;
-      font-size: 0.8rem;
-      letter-spacing: 0.1rem;
-      padding: 0.45rem 0.5rem;
+    .product-actions {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
     }
   }
 }

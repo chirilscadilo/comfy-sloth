@@ -3,7 +3,7 @@ import "./productCard.styles.scss";
 import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch } from "../../hooks/hooks";
 import {
   getProductFavorite,
   removeProductFavorite,
@@ -40,9 +40,29 @@ const ProductCard = ({
           <h5>${price}</h5>
           <p>{description?.substring(0, 150)}...</p>
 
-          <Link to={`/product/${id}`}>
-            <Button buttonType="simple">Details</Button>
-          </Link>
+          <div className="product-actions">
+            <Link to={`/product/${id}`}>
+              <Button buttonType="simple">Details</Button>
+            </Link>
+
+            {clickFavorite ? (
+              <a onClick={() => dispatch(removeProductFavorite({ id }))}>
+                <FavoriteIcon sx={{ marginTop: "1rem", fontSize: "30px" }} />
+              </a>
+            ) : (
+              <a
+                onClick={() =>
+                  dispatch(
+                    getProductFavorite({ id, name, price, img, description })
+                  )
+                }
+              >
+                <FavoriteBorderIcon
+                  sx={{ marginTop: "1rem", fontSize: "30px" }}
+                />
+              </a>
+            )}
+          </div>
         </div>
       </article>
     );
