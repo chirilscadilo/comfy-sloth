@@ -1,6 +1,12 @@
 import "./modalWindow.styles.scss";
 import ReactDOM from "react-dom";
-import { Button } from "../button/button";
+import CloseIcon from "@mui/icons-material/Close";
+
+export enum WindowTypes {
+  Success = "success",
+  Warning = "warning",
+  Info = "info",
+}
 
 type BackDropProps = {
   handleClose: () => void;
@@ -9,28 +15,27 @@ type BackDropProps = {
 type ModalWindowProps = {
   handleClose: () => void;
   text: string;
+  type?: WindowTypes | undefined;
 };
 
 export const BackDrop = ({ handleClose }: BackDropProps) => {
   return <div className="overlay" onClick={handleClose}></div>;
 };
 
-export const ModalOverlay = ({ handleClose, text }: ModalWindowProps) => {
+export const ModalOverlay = ({ handleClose, text, type }: ModalWindowProps) => {
   return (
     <>
-      <div className="modal-window">
+      <div className={`modal-window-${type}`}>
         <h5 className="modal-text">{text}</h5>
-        <div className="btn-container">
-          <Button buttonType={"simple"} onClick={handleClose}>
-            Close
-          </Button>
-        </div>
+        <a href="" onClick={handleClose}>
+          <CloseIcon />
+        </a>
       </div>
     </>
   );
 };
 
-export const ModalWindow = ({ handleClose, text }: ModalWindowProps) => {
+export const ModalWindow = ({ handleClose, text, type }: ModalWindowProps) => {
   return (
     <>
       {ReactDOM.createPortal(
@@ -38,7 +43,7 @@ export const ModalWindow = ({ handleClose, text }: ModalWindowProps) => {
         document.getElementById("backdrop-root")!
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay handleClose={handleClose} text={text} />,
+        <ModalOverlay handleClose={handleClose} text={text} type={type} />,
         document.getElementById("overlay-root")!
       )}
     </>

@@ -5,11 +5,11 @@ import {
   signInWithEmailAndPasswordFromAuth,
   getUserDataFromDocs,
 } from "../../firebase/firebase-config";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getCurrentUser } from "../../store/reducers/UserSlice";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
-import { ModalWindow } from "../modalWindow/modalWIndw";
+import { ModalWindow, WindowTypes } from "../modalWindow/modalWIndw";
 import { Button, ButtonTypes } from "../button/button";
 
 const defaultFromFields = {
@@ -24,6 +24,15 @@ export const LogInForm = () => {
   const [formFileds, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFileds;
   const [error, setError] = useState<string | null>(null);
+  const [notification, setNotification] = useState<string | null>(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setError(null);
+      setNotification(null);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [error, notification]);
 
   const resetFromFields = () => {
     setFormFields(defaultFromFields);
@@ -40,6 +49,7 @@ export const LogInForm = () => {
   const handleSubmitLogIn = async (event: any) => {
     event.preventDefault();
     try {
+      setNotification("Log In successfully!");
       const { user }: any = await signInWithEmailAndPasswordFromAuth(
         email,
         password
@@ -102,6 +112,14 @@ export const LogInForm = () => {
         <ModalWindow
           text={error}
           handleClose={() => setError(null)}
+          type={WindowTypes.Warning}
+        ></ModalWindow>
+      )}
+      {notification && (
+        <ModalWindow
+          text={notification}
+          handleClose={() => setNotification(null)}
+          type={WindowTypes.Success}
         ></ModalWindow>
       )}
     </form>

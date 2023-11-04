@@ -13,6 +13,7 @@ import {
   getProductFavorite,
   removeProductFavorite,
 } from "../store/reducers/FavoriteSlice";
+import { ModalWindow, WindowTypes } from "../components/modalWindow/modalWIndw";
 
 export const ProductDetail = () => {
   const favoriteProducts = useAppSelector(
@@ -33,6 +34,7 @@ export const ProductDetail = () => {
   const [fithImage, setFithImage] = useState(false);
   const [productAmount, setProductAmount] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -40,10 +42,16 @@ export const ProductDetail = () => {
       setProducts(loadingProductsData);
       setIsLoading(false);
     };
+
+    const timer = setTimeout(() => {
+      setNotification(null);
+    }, 3000);
+
     return () => {
       getProducts();
+      clearTimeout(timer);
     };
-  }, []);
+  }, [notification]);
 
   const product = products.find((item: Product) => item.id === id);
   const isFavoriteProduct = favoriteProducts.find((item) => item.id === id);
@@ -190,23 +198,37 @@ export const ProductDetail = () => {
               <div className="product-actions">
                 <Button
                   buttonType="simple"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch(
                       increaseProductAmount({
                         ...product!,
                         amount: productAmount >= 1 ? productAmount : 1,
                       })
-                    )
-                  }
+                    );
+                    setNotification(`${product.name} added to Cart`);
+                  }}
                 >
                   Add To Card
                 </Button>
+                {notification && (
+                  <ModalWindow
+                    text={notification}
+                    handleClose={() => setNotification(null)}
+                    type={WindowTypes.Info}
+                  ></ModalWindow>
+                )}
                 {isFavoriteProduct ? (
                   <a
                     onClick={() => dispatch(removeProductFavorite({ id: id }))}
                   >
                     <FavoriteIcon
-                      sx={{ marginTop: "1rem", fontSize: "30px" }}
+                      sx={{
+                        marginTop: "1rem",
+                        fontSize: "30px",
+                        "&:hover": {
+                          cursor: "pointer",
+                        },
+                      }}
                     />
                   </a>
                 ) : (
@@ -224,7 +246,13 @@ export const ProductDetail = () => {
                     }
                   >
                     <FavoriteBorderIcon
-                      sx={{ marginTop: "1rem", fontSize: "30px" }}
+                      sx={{
+                        marginTop: "1rem",
+                        fontSize: "30px",
+                        "&:hover": {
+                          cursor: "pointer",
+                        },
+                      }}
                     />
                   </a>
                 )}

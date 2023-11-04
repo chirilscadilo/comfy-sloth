@@ -1,11 +1,12 @@
 import "./Favorite.styles.scss";
 import { useAppSelector } from "../hooks/hooks";
 import ProductCard from "../components/productCard/productCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../components/button/button";
 
 export const Favorite = () => {
   let favoriteProducts = useAppSelector((state) => state.favorite);
+  const navigate = useNavigate();
 
   const uniqueFavoriteProductsFunction =
     favoriteProducts.productFavorite.filter(
@@ -25,6 +26,9 @@ export const Favorite = () => {
   }
   return (
     <>
+      <Button buttonType="simple" onClick={() => navigate(-1)}>
+        Back
+      </Button>
       <h2 className="favorite-title">Favorite List</h2>
       <div className="products-container">
         {uniqueFavoriteProductsFunction.map((product) => (

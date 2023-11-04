@@ -228,6 +228,11 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
+                      clickFavorite={
+                        favoriteProducts.find((item) => item.id === product.id)
+                          ? true
+                          : false
+                      }
                     />
                   ))
               : productSort === "alphabetic"
@@ -240,6 +245,11 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
+                      clickFavorite={
+                        favoriteProducts.find((item) => item.id === product.id)
+                          ? true
+                          : false
+                      }
                     />
                   ))
               : filteredProducts
@@ -251,6 +261,11 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
+                      clickFavorite={
+                        favoriteProducts.find((item) => item.id === product.id)
+                          ? true
+                          : false
+                      }
                     />
                   ))}
           </div>
