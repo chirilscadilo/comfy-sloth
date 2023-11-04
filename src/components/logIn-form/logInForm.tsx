@@ -11,6 +11,7 @@ import { useAppDispatch } from "../../hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { ModalWindow, WindowTypes } from "../modalWindow/modalWIndw";
 import { Button, ButtonTypes } from "../button/button";
+import { useAuth } from "../../hooks/use-auth";
 
 const defaultFromFields = {
   email: "",
@@ -20,7 +21,7 @@ const defaultFromFields = {
 export const LogInForm = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const { isAuth } = useAuth();
   const [formFileds, setFormFields] = useState(defaultFromFields);
   const { email, password } = formFileds;
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +31,7 @@ export const LogInForm = () => {
     const timer = setTimeout(() => {
       setError(null);
       setNotification(null);
+      if (isAuth) navigate(-1);
     }, 3000);
     return () => clearTimeout(timer);
   }, [error, notification]);
@@ -39,17 +41,23 @@ export const LogInForm = () => {
   };
 
   const logGoogleUser = async () => {
-    const { user } = await signInWithGooglePopup();
-    await createUserDocumentFromAuth(user);
+    try {
+      const { user } = await signInWithGooglePopup();
+      await createUserDocumentFromAuth(user);
 
-    dispatch(getCurrentUser({ ...user, displayName: user.displayName }));
-    navigate(-1);
+      dispatch(getCurrentUser({ ...user, displayName: user.displayName }));
+      setNotification("Log In successfully!");
+    } catch (error: any) {
+      switch (error.code) {
+        default:
+          setError(error.code);
+      }
+    }
   };
 
   const handleSubmitLogIn = async (event: any) => {
     event.preventDefault();
     try {
-      setNotification("Log In successfully!");
       const { user }: any = await signInWithEmailAndPasswordFromAuth(
         email,
         password
@@ -57,8 +65,8 @@ export const LogInForm = () => {
       const getDisplayName = await getUserDataFromDocs(user.uid);
 
       dispatch(getCurrentUser({ ...user, displayName: getDisplayName }));
+      setNotification("Log In successfully!");
       resetFromFields();
-      navigate(-1);
     } catch (error: any) {
       switch (error.code) {
         case "auth/wrong-password":
