@@ -10,6 +10,7 @@ import { LogIn } from "./pages/LogIn";
 import { Register } from "./pages/Register";
 import { LogOut } from "./pages/logOut";
 import { Favorite } from "./pages/Favorite";
+import { Footer } from "./components/footer/footer";
 function App() {
   return (
     <>
@@ -27,6 +28,7 @@ function App() {
           <Route path="/favorite" element={<Favorite />} />
         </Routes>
       </Container>
+      <Footer />
     </>
   );
 }
