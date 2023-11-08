@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import productsPrickedSlice from "./reducers/ProductSlice";
+import productsPrickedSlice from "./reducers/CardProductSlice";
 import currentUserSlice from "./reducers/UserSlice";
 import favoriteSlice from "./reducers/FavoriteSlice";
 

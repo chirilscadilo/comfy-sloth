@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
-import { increaseProductAmount } from "../store/reducers/ProductSlice";
+import { increaseProductAmount } from "../store/reducers/CardProductSlice";
 import { Product } from "../models/IProduct";
 import { loadProducts } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
@@ -61,7 +61,7 @@ export const ProductDetail = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <section>
+        <section className="product-section">
           <Button buttonType="simple" onClick={() => navigate(-1)}>
             Back
           </Button>

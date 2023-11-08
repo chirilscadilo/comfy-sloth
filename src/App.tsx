@@ -1,3 +1,4 @@
+import "./App.styles.scss";
 import { Routes, Route } from "react-router-dom";
 import { Container } from "@mui/material";
 import { Home } from "./pages/Home";
@@ -13,7 +14,7 @@ import { Favorite } from "./pages/Favorite";
 import { Footer } from "./components/footer/footer";
 function App() {
   return (
-    <>
+    <div className="App">
       <Navbar />
       <Container>
         <Routes>
@@ -29,7 +30,7 @@ function App() {
         </Routes>
       </Container>
       <Footer />
-    </>
+    </div>
   );
 }
 

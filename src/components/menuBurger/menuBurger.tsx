@@ -56,7 +56,7 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
                 <span>Products</span>
               </Link>
               <Link
-                to="/products"
+                to="/account"
                 onClick={() => {
                   menuObj.setActive(false);
                   menuObj.setBurgerClass("burger-bar unclicked");
@@ -114,7 +114,7 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
                 className="login-button"
                 onClick={() => dispatch(removeUser())}
               >
-                Sign Out
+                Logout
               </a>
             ) : (
               <Link

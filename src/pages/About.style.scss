@@ -28,3 +28,12 @@
     color: #617d98;
   }
 }
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 5rem 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}

@@ -6,7 +6,7 @@ import {
   removeCartProductLine,
   decreaseProductAmount,
   increaseProductAmountByOne,
-} from "../store/reducers/ProductSlice";
+} from "../store/reducers/CardProductSlice";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
 import { Button } from "../components/button/button";
