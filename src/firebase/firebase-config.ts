@@ -14,6 +14,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { OrdersProps } from "../models/Iorders";
 
 const app = initializeApp({
   // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -93,6 +94,7 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
+//used for registrtion
 export const createUserWithEmailAndPasswordFromAuth = async (
   email: string,
   password: string
@@ -102,6 +104,7 @@ export const createUserWithEmailAndPasswordFromAuth = async (
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
+//used for login
 export const signInWithEmailAndPasswordFromAuth = async (
   email: string,
   password: string
@@ -109,4 +112,41 @@ export const signInWithEmailAndPasswordFromAuth = async (
   if (!email || !password) return;
 
   return await signInWithEmailAndPassword(auth, email, password);
+};
+
+//orders collection methods
+//creates a document with order
+export const createOrder = async (orderInfo: OrdersProps) => {
+  if (!orderInfo) return;
+
+  const orderDocRef = doc(
+    db,
+    "orders",
+    `${Math.floor(Math.random() * 9999) + 1}`
+  );
+  const orderSnapshot = await getDoc(orderDocRef);
+
+  //if user does not exist - it will be added to firebase list
+  if (!orderSnapshot.exists()) {
+    const { uid, displayName, email, phone, totalAmount, totalSum, products } =
+      orderInfo;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(orderDocRef, {
+        uid,
+        displayName,
+        email,
+        phone,
+        totalAmount,
+        totalSum,
+        products,
+        createdAt,
+      });
+    } catch (error) {
+      console.log("error creating the user");
+    }
+  }
+  //if created
+  return orderDocRef;
 };

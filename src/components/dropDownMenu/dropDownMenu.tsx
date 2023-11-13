@@ -1,9 +1,8 @@
 import "./dropDownMenu.styles.scss";
 import { useState, useEffect, useRef } from "react";
 import DehazeIcon from "@mui/icons-material/Dehaze";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import InsertDriveFileIcon from "@mui/icons-material/InsertDriveFile";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-
 import { Link } from "react-router-dom";
 
 type DropDownProps = {
@@ -51,10 +50,10 @@ export const DropdownMenu = ({ displayName }: DropDownProps) => {
       {/* Conditionally render the dropdown content based on state */}
       {isDropdownOpen && (
         <div className="dropdown-content">
-          <a className="menu-item" href="">
-            <PermIdentityIcon />
-            Account
-          </a>
+          <Link className="menu-item" to="/myorders">
+            <InsertDriveFileIcon />
+            Orders
+          </Link>
           <Link to="/logOut" className="menu-item">
             <ExitToAppIcon />
             Logout

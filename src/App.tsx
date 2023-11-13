@@ -12,6 +12,8 @@ import { Register } from "./pages/Register";
 import { LogOut } from "./pages/logOut";
 import { Favorite } from "./pages/Favorite";
 import { Footer } from "./components/footer/footer";
+import { MyOrders } from "./pages/MyOrders";
+import { FinishOrder } from "./pages/FinishOrder";
 function App() {
   return (
     <div className="App">
@@ -27,6 +29,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/logOut" element={<LogOut />} />
           <Route path="/favorite" element={<Favorite />} />
+          <Route path="/myorders" element={<MyOrders />} />
+          <Route path="/orderform" element={<FinishOrder />} />
         </Routes>
       </Container>
       <Footer />

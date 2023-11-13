@@ -24,13 +24,6 @@ export const Cart = () => {
     return productPrice!.amount * productPrice!.price;
   };
 
-  const totalOrderSum = () => {
-    return pickedProduct.products
-      .map((product) => product.price * product.amount)
-      .reduce((accumulator, currentPrice) => accumulator + currentPrice, 0)
-      .toFixed(2);
-  };
-
   return pickedProduct.products.length > 0 ? (
     <section className="cart-component">
       <div className="cart-header">
@@ -103,7 +96,7 @@ export const Cart = () => {
           <article className="subtotal-shipping-container">
             <h5 className="subtotal-price">
               Subtotal
-              <span>${totalOrderSum()}</span>
+              <span>${pickedProduct.totalSum}</span>
             </h5>
             <p className="shipping-price">
               Shipping Fee
@@ -113,12 +106,14 @@ export const Cart = () => {
 
             <h4 className="total-order-price">
               Total Order
-              <span>${(Number(totalOrderSum()) + 5.34).toFixed(2)}</span>
+              <span>${(Number(pickedProduct.totalSum) + 5.34).toFixed(2)}</span>
             </h4>
           </article>
           <div className="total-card-btn">
             {isAuth ? (
-              <Button buttonType="simple">Order</Button>
+              <Link to="/orderform">
+                <Button buttonType="simple">Order</Button>
+              </Link>
             ) : (
               <Link to="/login">
                 <Button buttonType="simple">Login</Button>
