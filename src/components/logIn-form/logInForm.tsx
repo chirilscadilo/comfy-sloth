@@ -31,7 +31,7 @@ export const LogInForm = () => {
     const timer = setTimeout(() => {
       setError(null);
       setNotification(null);
-      if (isAuth) navigate(-1);
+      if (isAuth) navigate("/");
     }, 3000);
     return () => clearTimeout(timer);
   }, [error, notification]);

@@ -60,6 +60,8 @@
       font-size: 1rem;
       line-height: 1.25;
       margin-bottom: 0.75rem;
+      display: flex;
+      flex-direction: column;
     }
 
     .product-quantity {
@@ -265,6 +267,9 @@
       }
 
       .product-quantity {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         font-size: 1rem;
       }
       .product-total-price {

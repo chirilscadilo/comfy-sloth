@@ -56,13 +56,13 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
                 <span>Products</span>
               </Link>
               <Link
-                to="/account"
+                to="/myorders"
                 onClick={() => {
                   menuObj.setActive(false);
                   menuObj.setBurgerClass("burger-bar unclicked");
                 }}
               >
-                <span>Account</span>
+                <span>My Orders</span>
               </Link>
             </div>
           ) : (

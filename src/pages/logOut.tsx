@@ -16,7 +16,7 @@ export const LogOut = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setNotification(null);
-      if (!isAuth) navigate(-1);
+      if (!isAuth) navigate("/");
     }, 3000);
     return () => clearTimeout(timer);
   }, [notification]);
