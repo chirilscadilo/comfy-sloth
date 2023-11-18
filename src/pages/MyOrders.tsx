@@ -1,6 +1,5 @@
 import "./MyOrders.styles.scss";
 import { useAuth } from "../hooks/use-auth";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loadOrdersByUserUid } from "../firebase/firebase-config";
 import { OrdersProps } from "../models/IOrders";
