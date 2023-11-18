@@ -3,7 +3,7 @@ import ProductCard from "../components/productCard/productCard";
 import "./Products.styles.scss";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import AppsIcon from "@mui/icons-material/Apps";
-import { Product } from "../models/IProduct";
+import { Product, ProductFavoriteInterface } from "../models/IProduct";
 import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { useAppSelector } from "../hooks/hooks";
@@ -212,7 +212,8 @@ export function Products() {
                       clickList={clickList}
                       clickFavorite={
                         favoriteProducts.find(
-                          (item: Product) => item.id === product.id
+                          (item: ProductFavoriteInterface) =>
+                            item.id === product.id
                         )
                           ? true
                           : false
@@ -231,7 +232,8 @@ export function Products() {
                       clickList={clickList}
                       clickFavorite={
                         favoriteProducts.find(
-                          (item: Product) => item.id === product.id
+                          (item: ProductFavoriteInterface) =>
+                            item.id === product.id
                         )
                           ? true
                           : false
@@ -250,7 +252,8 @@ export function Products() {
                       clickList={clickList}
                       clickFavorite={
                         favoriteProducts.find(
-                          (item: Product) => item.id === product.id
+                          (item: ProductFavoriteInterface) =>
+                            item.id === product.id
                         )
                           ? true
                           : false
@@ -268,7 +271,8 @@ export function Products() {
                       clickList={clickList}
                       clickFavorite={
                         favoriteProducts.find(
-                          (item: Product) => item.id === product.id
+                          (item: ProductFavoriteInterface) =>
+                            item.id === product.id
                         )
                           ? true
                           : false

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/CardProductSlice";
-import { Product } from "../models/IProduct";
+import { Product, ProductFavoriteInterface } from "../models/IProduct";
 import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { Button } from "../components/button/button";
@@ -56,7 +56,7 @@ export const ProductDetail = () => {
 
   const product = products.find((item: Product) => item.id === id);
   const isFavoriteProduct = favoriteProducts.find(
-    (item: Product) => item.id === id
+    (item: ProductFavoriteInterface) => item.id === id
   );
 
   return (
