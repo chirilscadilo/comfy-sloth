@@ -2,17 +2,18 @@ import { Button } from "../components/button/button";
 import "./Home.styles.scss";
 import ProductCard from "../components/productCard/productCard";
 import { useEffect, useState } from "react";
-import { loadProducts } from "../firebase/firebase-config";
+import { db } from "../firebase/firebase-config";
 import { Product } from "../models/IProduct";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
 
 export function Home() {
   const [products, setProducts] = useState<any>([]);
 
   useEffect(() => {
     const getProducts = async () => {
-      const loadingProductsData = await loadProducts();
-      setProducts(loadingProductsData);
+      const data = await getDocs(collection(db, "products"));
+      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
     return () => {
@@ -33,7 +34,9 @@ export function Home() {
             aperiam odio ducimus, obcaecati libero et quia tempora excepturi
             quis alias?
           </article>
-          <Button buttonType="simple">Shop Now</Button>
+          <Link to="/products">
+            <Button buttonType="simple">Shop Now</Button>
+          </Link>
         </div>
         <img src="about.jpeg" alt="home-photo" />
       </section>

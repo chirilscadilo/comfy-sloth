@@ -4,9 +4,10 @@ import "./Products.styles.scss";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import AppsIcon from "@mui/icons-material/Apps";
 import { Product } from "../models/IProduct";
-import { loadProducts } from "../firebase/firebase-config";
+import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { useAppSelector } from "../hooks/hooks";
+import { collection, getDocs } from "firebase/firestore";
 
 export function Products() {
   const favoriteProducts = useAppSelector(
@@ -25,8 +26,8 @@ export function Products() {
 
   useEffect(() => {
     const getProducts = async () => {
-      const loadingProductsData = await loadProducts();
-      setProducts(loadingProductsData);
+      const data = await getDocs(collection(db, "products"));
+      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       setIsLoading(false);
     };
 
@@ -210,7 +211,9 @@ export function Products() {
                       key={product.id}
                       clickList={clickList}
                       clickFavorite={
-                        favoriteProducts.find((item) => item.id === product.id)
+                        favoriteProducts.find(
+                          (item: Product) => item.id === product.id
+                        )
                           ? true
                           : false
                       }
@@ -227,7 +230,9 @@ export function Products() {
                       key={product.id}
                       clickList={clickList}
                       clickFavorite={
-                        favoriteProducts.find((item) => item.id === product.id)
+                        favoriteProducts.find(
+                          (item: Product) => item.id === product.id
+                        )
                           ? true
                           : false
                       }
@@ -244,7 +249,9 @@ export function Products() {
                       key={product.id}
                       clickList={clickList}
                       clickFavorite={
-                        favoriteProducts.find((item) => item.id === product.id)
+                        favoriteProducts.find(
+                          (item: Product) => item.id === product.id
+                        )
                           ? true
                           : false
                       }
@@ -260,7 +267,9 @@ export function Products() {
                       key={product.id}
                       clickList={clickList}
                       clickFavorite={
-                        favoriteProducts.find((item) => item.id === product.id)
+                        favoriteProducts.find(
+                          (item: Product) => item.id === product.id
+                        )
                           ? true
                           : false
                       }

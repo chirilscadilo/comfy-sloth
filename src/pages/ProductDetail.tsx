@@ -4,7 +4,7 @@ import "./ProductDetail.styles.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/CardProductSlice";
 import { Product } from "../models/IProduct";
-import { loadProducts } from "../firebase/firebase-config";
+import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { Button } from "../components/button/button";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -14,6 +14,7 @@ import {
   removeProductFavorite,
 } from "../store/reducers/FavoriteSlice";
 import { ModalWindow, WindowTypes } from "../components/modalWindow/modalWIndw";
+import { collection, getDocs } from "firebase/firestore";
 
 export const ProductDetail = () => {
   const favoriteProducts = useAppSelector(
@@ -38,8 +39,8 @@ export const ProductDetail = () => {
 
   useEffect(() => {
     const getProducts = async () => {
-      const loadingProductsData = await loadProducts();
-      setProducts(loadingProductsData);
+      const data = await getDocs(collection(db, "products"));
+      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       setIsLoading(false);
     };
 
@@ -54,7 +55,9 @@ export const ProductDetail = () => {
   }, [notification]);
 
   const product = products.find((item: Product) => item.id === id);
-  const isFavoriteProduct = favoriteProducts.find((item) => item.id === id);
+  const isFavoriteProduct = favoriteProducts.find(
+    (item: Product) => item.id === id
+  );
 
   return (
     <>
