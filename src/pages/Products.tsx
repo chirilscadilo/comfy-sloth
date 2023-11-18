@@ -30,9 +30,7 @@ export function Products() {
       setIsLoading(false);
     };
 
-    return () => {
-      getProducts();
-    };
+    getProducts();
   }, []);
 
   const filteredProducts = products.filter((product: Product) => {
