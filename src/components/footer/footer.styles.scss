@@ -1,0 +1,25 @@
+.footer-container {
+  margin-top: auto;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222;
+
+  .footer-text {
+    display: flex;
+    justify-content: row;
+    align-items: center;
+    color: white;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    line-height: 1.25;
+
+    .footer-title {
+      color: #ab7a5f;
+    }
+  }
+}

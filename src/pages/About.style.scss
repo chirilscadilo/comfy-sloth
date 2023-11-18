@@ -1,0 +1,39 @@
+.about-container {
+  padding: 5rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+
+  img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 0.25rem;
+  }
+
+  .title {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+
+  .article {
+    margin: 2rem 0 auto;
+    max-width: 45em;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 2;
+    color: #617d98;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-container {
+    padding: 5rem 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
