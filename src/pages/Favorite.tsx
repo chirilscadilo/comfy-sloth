@@ -32,12 +32,7 @@ export const Favorite = () => {
       <h2 className="favorite-title">Favorite List</h2>
       <div className="products-container">
         {uniqueFavoriteProductsFunction.map((product) => (
-          <ProductCard
-            {...product}
-            key={product.id}
-            clickList={false}
-            clickFavorite={true}
-          />
+          <ProductCard {...product} key={product.id} clickList={false} />
         ))}
       </div>
     </>
