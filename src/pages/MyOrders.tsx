@@ -1,21 +1,26 @@
 import "./MyOrders.styles.scss";
 import { useAuth } from "../hooks/use-auth";
 import { useEffect, useState } from "react";
-import { loadOrdersByUserUid } from "../firebase/firebase-config";
+import { db, loadOrdersByUserUid } from "../firebase/firebase-config";
 import { OrdersProps } from "../models/IOrders";
+import { collection, getDocs } from "firebase/firestore";
 
 export const MyOrders = () => {
   const { uid } = useAuth();
   const [orders, setOrders] = useState<any>();
 
   useEffect(() => {
-    const getProducts = async () => {
-      const loadingProductsData = await loadOrdersByUserUid(uid!);
-      setOrders(loadingProductsData);
+    const getOrders = async () => {
+      const data = await getDocs(collection(db, "orders"));
+      return setOrders(
+        data.docs
+          .map((doc) => ({ ...doc.data(), id: doc.id }))
+          .filter((item: any) => item.uid === uid)
+      );
     };
 
     return () => {
-      getProducts();
+      getOrders();
     };
   }, []);
 

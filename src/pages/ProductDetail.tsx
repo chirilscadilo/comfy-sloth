@@ -53,7 +53,7 @@ export const ProductDetail = () => {
     }, 3000);
 
     getProducts();
-    clearTimeout(timer);
+    return () => clearTimeout(timer);
   }, [notification]);
 
   const isFavoriteProduct = favoriteProducts.find(
