@@ -13,13 +13,14 @@ export function Home() {
   useEffect(() => {
     const getProducts = async () => {
       const data = await getDocs(collection(db, "products"));
-      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setProducts(
+        data.docs.map((doc) => ({ ...doc.data(), id: doc.id })).slice(0, 3)
+      );
     };
 
     getProducts();
   }, []);
 
-  const slicedProducts = products.slice(0, 3);
   return (
     <div className="home-container">
       <section className="hero-section">
@@ -43,7 +44,7 @@ export function Home() {
       <section className="featured-products">
         <h2 className="featured-title">Featured Products</h2>
         <div className="featured-products-list">
-          {slicedProducts.map((product: Product) => (
+          {products.map((product: Product) => (
             <ProductCard {...product} key={product.id} />
           ))}
         </div>

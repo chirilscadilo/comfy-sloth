@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/CardProductSlice";
-import { Product, ProductFavoriteInterface } from "../models/IProduct";
+import { ProductFavoriteInterface } from "../models/IProduct";
 import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { Button } from "../components/button/button";
@@ -14,7 +14,7 @@ import {
   removeProductFavorite,
 } from "../store/reducers/FavoriteSlice";
 import { ModalWindow, WindowTypes } from "../components/modalWindow/modalWIndw";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 
 export const ProductDetail = () => {
   const favoriteProducts = useAppSelector(
@@ -23,7 +23,7 @@ export const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [products, setProducts] = useState<any>([]);
+  const [product, setProduct] = useState<any>([]);
 
   const dispatch = useAppDispatch();
 
@@ -38,21 +38,24 @@ export const ProductDetail = () => {
   const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
-    const getProducts = async () => {
-      const data = await getDocs(collection(db, "products"));
-      setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      setIsLoading(false);
+    const getProducts = async (id: any) => {
+      const data = await getDoc(doc(db, "products", id));
+      if (data.exists()) {
+        setProduct(data.data());
+        setIsLoading(false);
+      } else {
+        console.log("no document");
+      }
     };
 
     const timer = setTimeout(() => {
       setNotification(null);
     }, 3000);
 
-    getProducts();
+    getProducts(id);
     clearTimeout(timer);
-  }, [notification]);
+  }, []);
 
-  const product = products.find((item: Product) => item.id === id);
   const isFavoriteProduct = favoriteProducts.find(
     (item: ProductFavoriteInterface) => item.id === id
   );
