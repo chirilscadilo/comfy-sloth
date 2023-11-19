@@ -1,7 +1,7 @@
 import "./MyOrders.styles.scss";
 import { useAuth } from "../hooks/use-auth";
 import { useEffect, useState } from "react";
-import { db, loadOrdersByUserUid } from "../firebase/firebase-config";
+import { db } from "../firebase/firebase-config";
 import { OrdersProps } from "../models/IOrders";
 import { collection, getDocs } from "firebase/firestore";
 
