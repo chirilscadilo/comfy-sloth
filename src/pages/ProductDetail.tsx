@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/CardProductSlice";
-import { ProductFavoriteInterface } from "../models/IProduct";
+import { Product, ProductFavoriteInterface } from "../models/IProduct";
 import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { Button } from "../components/button/button";
@@ -14,7 +14,7 @@ import {
   removeProductFavorite,
 } from "../store/reducers/FavoriteSlice";
 import { ModalWindow, WindowTypes } from "../components/modalWindow/modalWIndw";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 
 export const ProductDetail = () => {
   const favoriteProducts = useAppSelector(
@@ -38,26 +38,26 @@ export const ProductDetail = () => {
   const [notification, setNotification] = useState<string | null>(null);
 
   useEffect(() => {
-    const getProducts = async (id: any) => {
-      const data = await getDoc(doc(db, "products", id));
-      if (data.exists()) {
-        setProduct(data.data());
-        setIsLoading(false);
-      } else {
-        console.log("no document");
-      }
+    const getProducts = async () => {
+      const data = await getDocs(collection(db, "products"));
+      setProduct(
+        data.docs
+          .map((doc) => ({ ...doc.data(), id: doc.id }))
+          .find((item: ProductFavoriteInterface) => item.id === id)
+      );
+      setIsLoading(false);
     };
 
     const timer = setTimeout(() => {
       setNotification(null);
     }, 3000);
 
-    getProducts(id);
+    getProducts();
     clearTimeout(timer);
-  }, []);
+  }, [notification]);
 
   const isFavoriteProduct = favoriteProducts.find(
-    (item: ProductFavoriteInterface) => item.id === id
+    (item: ProductFavoriteInterface) => item.id === product.id
   );
 
   return (
@@ -223,7 +223,9 @@ export const ProductDetail = () => {
                 )}
                 {isFavoriteProduct ? (
                   <a
-                    onClick={() => dispatch(removeProductFavorite({ id: id }))}
+                    onClick={() =>
+                      dispatch(removeProductFavorite({ id: product.id }))
+                    }
                   >
                     <FavoriteIcon
                       sx={{
@@ -240,11 +242,11 @@ export const ProductDetail = () => {
                     onClick={() =>
                       dispatch(
                         getProductFavorite({
-                          id: product?.id,
-                          name: product?.name,
-                          price: product?.price,
-                          img: product?.img,
-                          description: product?.description,
+                          id: product.id,
+                          name: product.name,
+                          price: product.price,
+                          img: product.img,
+                          description: product.description,
                         })
                       )
                     }

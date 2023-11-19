@@ -3,11 +3,12 @@ import "./productCard.styles.scss";
 import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useAppDispatch } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
   getProductFavorite,
   removeProductFavorite,
 } from "../../store/reducers/FavoriteSlice";
+import { ProductFavoriteInterface } from "../../models/IProduct";
 
 interface ProductProps {
   id?: string | undefined;
@@ -16,7 +17,6 @@ interface ProductProps {
   img?: string | undefined;
   description?: string | undefined;
   clickList?: boolean | undefined;
-  clickFavorite?: boolean | undefined;
 }
 
 const ProductCard = ({
@@ -26,9 +26,15 @@ const ProductCard = ({
   img,
   description,
   clickList,
-  clickFavorite,
 }: ProductProps) => {
   const dispatch = useAppDispatch();
+  const favoriteProducts = useAppSelector(
+    (state) => state.favorite.productFavorite
+  );
+
+  const isFavoriteProduct = favoriteProducts.find(
+    (item: ProductFavoriteInterface) => item.id === id
+  );
   if (clickList) {
     return (
       <article className="product-card-container-list">
@@ -45,7 +51,7 @@ const ProductCard = ({
               <Button buttonType="simple">Details</Button>
             </Link>
 
-            {clickFavorite ? (
+            {isFavoriteProduct ? (
               <a onClick={() => dispatch(removeProductFavorite({ id }))}>
                 <FavoriteIcon sx={{ marginTop: "1rem", fontSize: "30px" }} />
               </a>
@@ -74,7 +80,7 @@ const ProductCard = ({
         </Link>
         <div className="footer">
           <p>{name}</p>
-          {clickFavorite ? (
+          {isFavoriteProduct ? (
             <a onClick={() => dispatch(removeProductFavorite({ id }))}>
               <FavoriteIcon />
             </a>

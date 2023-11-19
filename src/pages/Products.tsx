@@ -3,16 +3,12 @@ import ProductCard from "../components/productCard/productCard";
 import "./Products.styles.scss";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import AppsIcon from "@mui/icons-material/Apps";
-import { Product, ProductFavoriteInterface } from "../models/IProduct";
+import { Product } from "../models/IProduct";
 import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
-import { useAppSelector } from "../hooks/hooks";
 import { collection, getDocs } from "firebase/firestore";
 
 export function Products() {
-  const favoriteProducts = useAppSelector(
-    (state) => state.favorite.productFavorite
-  );
   const [products, setProducts] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -64,7 +60,6 @@ export function Products() {
     setClickGrid(false);
     setClickList(true);
   };
-
   return (
     <div className="products-filter-container">
       <form className="filter-container">
@@ -210,14 +205,6 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
-                      clickFavorite={
-                        favoriteProducts.find(
-                          (item: ProductFavoriteInterface) =>
-                            item.id === product.id
-                        )
-                          ? true
-                          : false
-                      }
                     />
                   ))
               : productSort === "higher"
@@ -230,14 +217,6 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
-                      clickFavorite={
-                        favoriteProducts.find(
-                          (item: ProductFavoriteInterface) =>
-                            item.id === product.id
-                        )
-                          ? true
-                          : false
-                      }
                     />
                   ))
               : productSort === "alphabetic"
@@ -250,14 +229,6 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
-                      clickFavorite={
-                        favoriteProducts.find(
-                          (item: ProductFavoriteInterface) =>
-                            item.id === product.id
-                        )
-                          ? true
-                          : false
-                      }
                     />
                   ))
               : filteredProducts
@@ -269,14 +240,6 @@ export function Products() {
                       {...product}
                       key={product.id}
                       clickList={clickList}
-                      clickFavorite={
-                        favoriteProducts.find(
-                          (item: ProductFavoriteInterface) =>
-                            item.id === product.id
-                        )
-                          ? true
-                          : false
-                      }
                     />
                   ))}
           </div>
