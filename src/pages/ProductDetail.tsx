@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./ProductDetail.styles.scss";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { increaseProductAmount } from "../store/reducers/CardProductSlice";
-import { Product, ProductFavoriteInterface } from "../models/IProduct";
+import { ProductFavoriteInterface } from "../models/IProduct";
 import { db } from "../firebase/firebase-config";
 import { Spinner } from "../components/spinner/spinner";
 import { Button } from "../components/button/button";
@@ -14,7 +14,7 @@ import {
   removeProductFavorite,
 } from "../store/reducers/FavoriteSlice";
 import { ModalWindow, WindowTypes } from "../components/modalWindow/modalWIndw";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export const ProductDetail = () => {
   const favoriteProducts = useAppSelector(
