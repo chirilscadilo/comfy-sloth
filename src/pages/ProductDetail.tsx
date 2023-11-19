@@ -48,8 +48,15 @@ export const ProductDetail = () => {
       setNotification(null);
     }, 3000);
 
+<<<<<<< HEAD
     getProducts();
     clearTimeout(timer);
+=======
+    return () => {
+      getProducts();
+      clearTimeout(timer);
+    };
+>>>>>>> d2a9615c49494039355aad9939b0ee4fa241b44b
   }, [notification]);
 
   const product = products.find((item: Product) => item.id === id);

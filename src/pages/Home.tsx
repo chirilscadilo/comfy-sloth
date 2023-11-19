@@ -16,9 +16,16 @@ export function Home() {
       setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
+<<<<<<< HEAD
     getProducts();
   }, []);
 
+=======
+    return () => {
+      getProducts();
+    };
+  }, []);
+>>>>>>> d2a9615c49494039355aad9939b0ee4fa241b44b
   const slicedProducts = products.slice(0, 3);
   return (
     <div className="home-container">
