@@ -19,9 +19,7 @@ export const MyOrders = () => {
       );
     };
 
-    return () => {
-      getOrders();
-    };
+    getOrders();
   }, []);
 
   return (
