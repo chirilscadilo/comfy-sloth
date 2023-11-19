@@ -1,0 +1,99 @@
+.menu {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 5em;
+  left: 0;
+  transform: translate(-100%);
+  transition: all 0.6s;
+  z-index: 10;
+
+  .menu-content {
+    width: 100%;
+    height: 100%;
+    background-color: #ffff;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s;
+
+    .menu-links-container {
+      display: flex;
+      flex-direction: column;
+
+      a {
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        letter-spacing: 0.1rem;
+        color: black;
+        text-decoration: none;
+        padding: 1rem 1.5rem;
+        transition: all 0.3s linear;
+
+        &:hover {
+          cursor: pointer;
+          padding-left: 5px;
+          background-color: #f1f5f8;
+        }
+      }
+
+      span {
+        margin: 10px;
+      }
+    }
+
+    .menu-cart-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+
+      .shopping-cart-button {
+        display: flex;
+        align-items: center;
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        color: black;
+        text-decoration: none;
+        font-size: 1.5rem;
+        position: relative;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        .rounded-circle {
+          background-color: #ab7a5f;
+          color: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          width: 16px;
+          height: 16px;
+          font-size: 0.75rem;
+          padding: 12px;
+          position: absolute;
+          top: -10%;
+          right: -10%;
+        }
+      }
+
+      .login-button {
+        display: flex;
+        align-items: center;
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        color: black;
+        text-decoration: none;
+        font-size: 1.5rem;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.menu.active {
+  transform: translate(0);
+}

@@ -1,0 +1,126 @@
+.product-section {
+  margin-bottom: 2rem;
+  .product-container {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+
+    .img-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      .main-img {
+        width: 100%;
+        height: 500px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+      }
+
+      .extra-img {
+        margin: 0.75rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+
+        img {
+          height: 75px;
+          object-fit: cover;
+          border-radius: 0.5rem;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .product-details {
+      .title {
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        letter-spacing: 0.1rem;
+        line-height: 1;
+        text-transform: capitalize;
+        margin-bottom: 0.75rem;
+      }
+
+      .price {
+        color: #ab7a5f;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.1rem;
+        font-size: 1.25rem;
+        line-height: 1.25;
+        margin-bottom: 0.75rem;
+      }
+
+      .description {
+        max-width: 45em;
+        color: #102a42;
+        font-family: "Roboto", sans-serif;
+        font-weight: 200;
+        line-height: 2;
+        font-size: 1rem;
+        letter-spacing: 0.1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .info {
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        display: grid;
+        grid-template-columns: 125px 1fr;
+        margin-bottom: 1.25rem;
+        span {
+          font-family: "Roboto", sans-serif;
+          font-weight: 700;
+          color: #324d67;
+        }
+      }
+
+      .shopping {
+        margin-top: 0.75rem;
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: center;
+
+        .qty {
+          font-family: "Roboto", sans-serif;
+          font-weight: 700;
+          font-size: 2.5rem;
+          line-height: 1;
+        }
+        .plus,
+        .minus {
+          background-color: white;
+          border: none;
+          font-size: 1.75rem;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #f1f5f8;
+            border-radius: 0.25rem;
+          }
+        }
+      }
+
+      .product-actions {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .product-section {
+    .product-container {
+      grid-template-columns: 1fr;
+    }
+  }
+}

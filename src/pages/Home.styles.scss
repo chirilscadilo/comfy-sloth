@@ -1,0 +1,75 @@
+.home-container {
+  .hero-section {
+    padding: 5rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+
+    img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 0.25rem;
+    }
+
+    .title {
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      line-height: 1.5;
+    }
+
+    .article {
+      margin: 2rem 0 auto;
+      max-width: 45em;
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 2;
+      color: #617d98;
+    }
+  }
+
+  .featured-products {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    .featured-title {
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 1.5;
+    }
+
+    .featured-products-list {
+      margin-top: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .all-products-btn {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    .hero-section {
+      padding: 5rem 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    .featured-products {
+      .featured-products-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+      }
+    }
+  }
+}
