@@ -109,6 +109,7 @@ export function Products() {
             <option value="Marcos">Marcos</option>
             <option value="Ikea">Ikea</option>
             <option value="Liddy">Liddy</option>
+            <option value="Caressa">Caressa</option>
           </select>
         </div>
 

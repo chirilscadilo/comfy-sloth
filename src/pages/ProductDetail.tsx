@@ -59,7 +59,7 @@ export const ProductDetail = () => {
   const isFavoriteProduct = favoriteProducts.find(
     (item: ProductFavoriteInterface) => item.id === product.id
   );
-
+  console.log(product.company);
   return (
     <>
       {isLoading ? (
@@ -173,7 +173,7 @@ export const ProductDetail = () => {
               </p>
               <p className="info">
                 <span>Brand :</span>
-                Liddy
+                {product?.company}
               </p>
               <hr />
               <div className="shopping">
