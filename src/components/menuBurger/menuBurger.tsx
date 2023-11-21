@@ -101,7 +101,10 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
             <Link
               to="/cart"
               className="shopping-cart-button"
-              onClick={() => menuObj.setActive(false)}
+              onClick={() => {
+                menuObj.setActive(false);
+                menuObj.setBurgerClass("burger-bar unclicked");
+              }}
             >
               Cart
               <ShoppingCartIcon sx={{ fontSize: "28px", margin: "8px" }} />
@@ -112,7 +115,11 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
               <a
                 href=""
                 className="login-button"
-                onClick={() => dispatch(removeUser())}
+                onClick={() => {
+                  dispatch(removeUser());
+                  menuObj.setActive(false);
+                  menuObj.setBurgerClass("burger-bar unclicked");
+                }}
               >
                 Logout
               </a>
@@ -120,7 +127,10 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
               <Link
                 to="/login"
                 className="login-button"
-                onClick={() => menuObj.setActive(false)}
+                onClick={() => {
+                  menuObj.setActive(false);
+                  menuObj.setBurgerClass("burger-bar unclicked");
+                }}
               >
                 Login
                 <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
