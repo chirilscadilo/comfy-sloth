@@ -2,11 +2,10 @@ import { Link, useNavigate } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import "./menuBurger.styles.scss";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 import { useAuth } from "../../hooks/use-auth";
 import { removeUser } from "../../store/reducers/UserSlice";
-import { ModalWindow, WindowTypes } from "../modalWindow/modalWIndw";
 
 interface MenuBurgerProps {
   active: boolean;
@@ -21,16 +20,7 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
   const totalProductsAmount = useAppSelector(
     (state) => state.products.totalAmount
   );
-  const [notification, setNotification] = useState<string | null>(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setNotification(null);
-      if (!isAuth) navigate("/");
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [notification]);
 
   return (
     <>
@@ -124,13 +114,12 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
 
             {isAuth ? (
               <a
-                href=""
                 className="login-button"
                 onClick={() => {
                   dispatch(removeUser());
-                  setNotification("Logout sucessfully");
                   menuObj.setActive(false);
                   menuObj.setBurgerClass("burger-bar unclicked");
+                  navigate("/");
                 }}
               >
                 Logout
@@ -147,13 +136,6 @@ const MenuBurger = (menuObj: MenuBurgerProps) => {
                 Login
                 <HowToRegIcon sx={{ fontSize: "28px", margin: "8px" }} />
               </Link>
-            )}
-            {notification && (
-              <ModalWindow
-                text={notification}
-                handleClose={() => setNotification(null)}
-                type={WindowTypes.Info}
-              ></ModalWindow>
             )}
           </div>
         </div>
