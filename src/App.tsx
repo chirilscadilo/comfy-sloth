@@ -31,6 +31,7 @@ function App() {
           <Route path="/favorite" element={<Favorite />} />
           <Route path="/myorders" element={<MyOrders />} />
           <Route path="/orderform" element={<FinishOrder />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </Container>
       <Footer />
